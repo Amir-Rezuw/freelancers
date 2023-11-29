@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toast";
 
 import "./App.css";
 
@@ -12,11 +11,8 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ToastContainer
-        rtl
-        autoClose={environment.toastDelay}
-        pauseOnHover
-        draggable={false}
-        theme="colored"
+        delay={environment.toastDelay}
+        position="top-right"
       />
       <div className="container xl:max-w-screen-xl">
         <Routes>

@@ -15,11 +15,13 @@ const OTPInputs = ({
   finalCodeRef,
   inputClassNames,
   children,
+  disabled = false,
 }: {
   fieldLength: number;
   finalCodeRef: MutableRefObject<number>;
   inputClassNames?: string;
   children?: ReactNode;
+  disabled?: boolean;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [otp, setOtp] = useState<string[]>(new Array(fieldLength).fill(""));
@@ -29,7 +31,7 @@ const OTPInputs = ({
     index: number
   ) => {
     const { value: inputValue } = event.target;
-    if (Number.isNaN(+inputValue)) return;
+    if (Number.isNaN(+inputValue) || activeOtpInput !== index) return;
 
     const newOtp: string[] = [...otp];
     newOtp[index] = inputValue.substring(inputValue.length - 1);
@@ -67,7 +69,12 @@ const OTPInputs = ({
               onChange={(e) => onInputChange(e, index)}
               value={otp[index]}
               onKeyUp={onKeyup}
-              disabled={activeOtpInput !== index}
+              onClick={(e) => {
+                if (activeOtpInput !== index) {
+                  inputRef.current?.focus();
+                }
+              }}
+              disabled={disabled}
             />
             <IsVisible isVisible={index + 1 !== otp.length}>
               {children}

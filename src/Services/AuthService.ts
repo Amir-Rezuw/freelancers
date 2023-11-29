@@ -1,14 +1,21 @@
 import API from "../Constants/API";
-import { ISendOtpRequestedData, ISendOtpResponse } from "../Types/Server/User";
+import {
+  ICheckOtpRequestedData,
+  ICheckOtpResponse,
+  ISendOtpRequestedData,
+  ISendOtpResponse,
+} from "../Types/Server/User";
 import IApiResponse from "../Types/Shared/IApiResponse";
 import http from "./HttpServices";
 
-export const sendOtp = (
+export const sendOtp = async (
   data: ISendOtpRequestedData
 ): Promise<IApiResponse<ISendOtpResponse>> => {
-  return http.post(API.sendOtp, data);
+  return (await http.post(API.sendOtp, data)).data;
 };
 
-export const checkOtp = (data: string) => {
-  return http.post(API.checkOtp, data);
+export const checkOtp = async (
+  data: ICheckOtpRequestedData
+): Promise<IApiResponse<ICheckOtpResponse>> => {
+  return (await http.post(API.checkOtp, data)).data;
 };

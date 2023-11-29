@@ -3,17 +3,17 @@ import { useMemo } from "react";
 
 import API from "../../../Constants/API";
 import { environment } from "../../../Environment/env";
-import { sendOtp } from "../../../Services/AuthService";
+import { checkOtp } from "../../../Services/AuthService";
 
-const useSendOtp = () => {
+const useCheckOtp = () => {
   const mutationKey = useMemo(
-    () => [`${environment.baseUrl}${API.sendOtp}`],
+    () => [`${environment.baseUrl}${API.checkOtp}`],
     []
   );
   return useMutation({
     mutationKey,
-    mutationFn: sendOtp,
+    mutationFn: checkOtp,
   });
 };
 
-export default useSendOtp;
+export default useCheckOtp;
