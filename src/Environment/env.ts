@@ -1,9 +1,9 @@
 interface IEnvironment {
   appName: string;
-
+  OtpLength: number;
+  OtpResendTimer: number;
   baseUrl: string;
   domain: string;
-
   toastDelay: number;
 }
 
@@ -12,4 +12,6 @@ export const environment: Readonly<IEnvironment> = {
   baseUrl: "http://localhost:5000/api/",
   domain: "http://localhost:5000/",
   toastDelay: 5000,
+  OtpLength: 6,
+  OtpResendTimer: 90,
 };

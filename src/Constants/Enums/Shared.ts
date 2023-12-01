@@ -3,3 +3,7 @@ export enum Statuses {
   "PENDING" = 1,
   "VERIFIED" = 2,
 }
+export enum UserTypes {
+  owner = "OWNER",
+  freelancer = "FREELANCER",
+}

@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toast";
 
 import "./App.css";
@@ -16,6 +16,10 @@ function App() {
       />
       <div className="container xl:max-w-screen-xl">
         <Routes>
+          <Route
+            index
+            element={<Navigate to={"/auth"} />}
+          />
           <Route
             path="/auth"
             element={<Auth />}
