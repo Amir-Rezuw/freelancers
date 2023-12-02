@@ -1,9 +1,10 @@
 import API from "../Constants/API";
 import {
   ICheckOtpRequestedData,
-  ICheckOtpResponse,
+  ICompleteProfileRequiredData,
   ISendOtpRequestedData,
   ISendOtpResponse,
+  IUserData,
 } from "../Types/Server/User";
 import IApiResponse from "../Types/Shared/IApiResponse";
 import http from "./HttpServices";
@@ -16,6 +17,11 @@ export const sendOtp = async (
 
 export const checkOtp = async (
   data: ICheckOtpRequestedData
-): Promise<IApiResponse<ICheckOtpResponse>> => {
+): Promise<IApiResponse<IUserData>> => {
   return (await http.post(API.checkOtp, data)).data;
+};
+export const completeProfile = async (
+  data: ICompleteProfileRequiredData
+): Promise<IApiResponse<IUserData>> => {
+  return (await http.post(API.completeProfile, data)).data;
 };

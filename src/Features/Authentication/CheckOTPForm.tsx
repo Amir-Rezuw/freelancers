@@ -37,9 +37,10 @@ const CheckOTPForm = ({
         otp: `${finalCode.current}`,
       });
       toast.success(data.message);
+
       if (data.user.isActive) {
       } else {
-        navigate("/complete-profile");
+        navigate(`/complete-profile`);
       }
     } catch (error) {
       toast.error((error as AxiosError).message);

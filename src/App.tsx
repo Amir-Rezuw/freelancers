@@ -6,6 +6,7 @@ import "./App.css";
 
 import { environment } from "./Environment/env";
 import Auth from "./Pages/Auth";
+import CompleteProfile from "./Pages/CompleteProfile";
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
           <Route
             path="/auth"
             element={<Auth />}
+          />
+          <Route
+            path="/complete-profile"
+            element={<CompleteProfile />}
           />
         </Routes>
       </div>

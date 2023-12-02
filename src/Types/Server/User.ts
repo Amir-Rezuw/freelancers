@@ -1,3 +1,5 @@
+import { Statuses, UserTypes } from "../../Constants/Enums/Shared";
+
 export interface ISendOtpRequestedData {
   phoneNumber: string;
 }
@@ -10,7 +12,8 @@ export interface ICheckOtpRequestedData {
   phoneNumber: string;
   otp: string;
 }
-export interface ICheckOtpResponse {
+
+export interface IUserData {
   message: string;
   user: {
     otp: {
@@ -23,11 +26,18 @@ export interface ICheckOtpResponse {
     resetLink: string | null;
     isVerifiedPhoneNumber: boolean;
     isActive: boolean;
-    status: number;
-    role: string;
+    status: Statuses;
+    role: UserTypes;
     createdAt: string;
     updatedAt: string;
     __v: number;
     avatarUrl: null | string;
+    email?: string;
+    name?: string;
   };
+}
+export interface ICompleteProfileRequiredData {
+  name: string;
+  email: string;
+  role: UserTypes;
 }
