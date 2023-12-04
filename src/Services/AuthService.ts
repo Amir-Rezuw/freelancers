@@ -6,22 +6,22 @@ import {
   ISendOtpResponse,
   IUserData,
 } from "../Types/Server/User";
-import IApiResponse from "../Types/Shared/IApiResponse";
+import { Success } from "../Types/Shared/IApiResponse";
 import http from "./HttpServices";
 
 export const sendOtp = async (
   data: ISendOtpRequestedData
-): Promise<IApiResponse<ISendOtpResponse>> => {
+): Promise<Success<ISendOtpResponse>> => {
   return (await http.post(API.sendOtp, data)).data;
 };
 
 export const checkOtp = async (
   data: ICheckOtpRequestedData
-): Promise<IApiResponse<IUserData>> => {
+): Promise<Success<IUserData>> => {
   return (await http.post(API.checkOtp, data)).data;
 };
 export const completeProfile = async (
   data: ICompleteProfileRequiredData
-): Promise<IApiResponse<IUserData>> => {
+): Promise<Success<IUserData>> => {
   return (await http.post(API.completeProfile, data)).data;
 };

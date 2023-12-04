@@ -1,9 +1,10 @@
-import { AxiosError } from "axios";
 import { FormEvent, Fragment, useRef } from "react";
 import { HiArrowRight } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toast";
+import { Statuses, UserTypes } from "../../Constants/Enums/Shared";
 import { environment } from "../../Environment/env";
+import useErrorType from "../Shared/Hooks/useErrorType";
 import useInterval from "../Shared/Hooks/useInterval";
 import Loading from "../Shared/UI/Loading";
 import OTPInputs from "../Shared/UI/OTPInputs";
@@ -36,14 +37,35 @@ const CheckOTPForm = ({
         phoneNumber,
         otp: `${finalCode.current}`,
       });
-      toast.success(data.message);
 
-      if (data.user.isActive) {
-      } else {
+      if (!data.user.isActive) {
+        toast.success(data.message);
         navigate(`/complete-profile`);
+        return;
+      }
+      if (data.user.status === Statuses.PENDING) {
+        toast.warn("پروفایل شما در انتظار تایید است لطفا صبور باشید.");
+        return;
+      }
+      if (data.user.status === Statuses.REJECTED) {
+        toast.error(
+          "پروفایل شما توسط ادمین مسدود شده است لطفا با پشتیبانی تماس بگیرید."
+        );
+        return;
+      }
+      if (data.user.role === UserTypes.owner) {
+        toast.success("خوش آمدید");
+        navigate("/owner");
+        return;
+      }
+
+      if (data.user.role === UserTypes.freelancer) {
+        toast.success("خوش آمدید");
+        navigate("/freelancer");
+        return;
       }
     } catch (error) {
-      toast.error((error as AxiosError).message);
+      toast.error(useErrorType(e));
     }
   };
 

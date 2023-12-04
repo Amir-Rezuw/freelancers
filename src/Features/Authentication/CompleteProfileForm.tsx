@@ -1,8 +1,8 @@
-import { AxiosError } from "axios";
 import { FormEvent, useRef, useState } from "react";
 import { toast } from "react-toast";
 import { UserTypes } from "../../Constants/Enums/Shared";
 import { ICompleteProfileRequiredData } from "../../Types/Server/User";
+import useErrorType from "../Shared/Hooks/useErrorType";
 import LabeledInput from "../Shared/UI/LabeledInput";
 import Loading from "../Shared/UI/Loading";
 import Radio from "../Shared/UI/Radio";
@@ -28,7 +28,7 @@ const CompleteProfileForm = () => {
       const response = await mutateAsync(data);
       toast.success(response.data.message);
     } catch (error) {
-      toast.error((error as AxiosError).message);
+      toast.error(useErrorType(e));
     }
   };
 

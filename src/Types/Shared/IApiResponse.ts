@@ -1,5 +1,8 @@
-interface IApiResponse<T> {
+export interface Success<T> {
   statusCode: number;
   data: T;
 }
-export default IApiResponse;
+export interface IError {
+  message: string;
+  statusCode: number;
+}
