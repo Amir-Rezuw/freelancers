@@ -10,11 +10,11 @@ const SendOTPForm = forwardRef<HTMLInputElement | null, IProps>(
   ({ OtpSender, isPending }, ref) => {
     return (
       <form
-        className="space-y-8"
+        className="space-y-8 w-full"
         onSubmit={OtpSender}
         id="send-otp-form"
       >
-        <div className="">
+        <div>
           <LabeledInput
             inputDirection="ltr"
             label="شماره موبایل"

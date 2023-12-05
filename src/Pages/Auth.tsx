@@ -1,11 +1,10 @@
-import { Fragment } from "react";
 import AuthContainer from "../Features/Authentication/AuthContainer";
 
 const Auth = ({}) => {
   return (
-    <Fragment>
+    <div className="container xl:max-w-screen-xl">
       <AuthContainer />
-    </Fragment>
+    </div>
   );
 };
 

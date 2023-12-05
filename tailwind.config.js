@@ -14,6 +14,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      boxShadow: {
+        primary: "0px 0px 20px -10px #000000",
+      },
       fontFamily: {
         sans: ["Iran-Yekan", ...fontFamily.sans],
       },

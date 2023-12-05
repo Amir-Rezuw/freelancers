@@ -1,5 +1,5 @@
 const Home = () => {
-  return <div></div>;
+  return <div className="container xl:max-w-screen-xl"></div>;
 };
 
 export default Home;

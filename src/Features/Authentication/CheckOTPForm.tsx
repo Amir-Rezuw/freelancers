@@ -72,7 +72,7 @@ const CheckOTPForm = ({
   return (
     <Fragment>
       <button
-        className="flex items-center w-4/12 justify-between text-warning"
+        className="flex items-center w-4/12 justify-between text-warning self-start"
         onClick={onBackBtnPress}
       >
         <HiArrowRight />

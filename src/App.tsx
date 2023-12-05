@@ -5,10 +5,12 @@ import { ToastContainer } from "react-toast";
 import "./App.css";
 
 import { environment } from "./Environment/env";
+import AppLayout from "./Features/Shared/UI/AppLayout";
 import Auth from "./Pages/Auth";
 import CompleteProfile from "./Pages/CompleteProfile";
 import Home from "./Pages/Home";
 import NotFound from "./Pages/NotFound";
+import Owner from "./Pages/Owner";
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -17,26 +19,32 @@ function App() {
         delay={environment.toastDelay}
         position="top-right"
       />
-      <div className="container xl:max-w-screen-xl">
-        <Routes>
+
+      <Routes>
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/auth"
+          element={<Auth />}
+        />
+        <Route
+          path="/complete-profile"
+          element={<CompleteProfile />}
+        />
+
+        <Route element={<AppLayout />}>
           <Route
-            path="/auth"
-            element={<Auth />}
+            path="/owner"
+            element={<Owner />}
           />
-          <Route
-            path="/complete-profile"
-            element={<CompleteProfile />}
-          />
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
-        </Routes>
-      </div>
+        </Route>
+        <Route
+          path="*"
+          element={<NotFound />}
+        />
+      </Routes>
     </QueryClientProvider>
   );
 }
