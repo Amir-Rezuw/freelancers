@@ -4,6 +4,7 @@ import { TbPencilMinus } from "react-icons/tb";
 import { IOwnerProjects } from "../../Types/Server/Projects";
 import { textService } from "../../Utils/TextAndNumber";
 import { timeService } from "../../Utils/TimeService";
+import ConfirmDelete from "../Shared/UI/ConfirmDelete";
 import Modal from "../Shared/UI/Modal";
 interface IProps {
   index: number;
@@ -57,11 +58,15 @@ const ProjectRow = ({ index, project }: IProps) => {
           </button>
           <Modal
             isOpen={isDeleteModalOpen}
-            className="max-w-3xl w-full"
-            modalToggler={toggleEditModal}
-            modalHeaderTitle="Delete"
+            className="max-w-lg w-full"
+            modalToggler={toggleDeleteModal}
+            modalHeaderTitle={`حذف  ${project.title}`}
           >
-            Delete
+            <ConfirmDelete
+              title={project.title}
+              onConfirm={() => {}}
+              onCancel={() => setIsDeleteModalOpen(false)}
+            />
           </Modal>
         </div>
         <div>
@@ -75,8 +80,8 @@ const ProjectRow = ({ index, project }: IProps) => {
           <Modal
             isOpen={isEditModalOpen}
             className="max-w-3xl w-full"
-            modalToggler={toggleDeleteModal}
-            modalHeaderTitle="edit"
+            modalToggler={toggleEditModal}
+            modalHeaderTitle={`ویرایش ${project.title}`}
           >
             edit
           </Modal>

@@ -49,6 +49,9 @@
   .btn-primary {
     @apply px-4 py-3 bg-primary-blue-900 text-primary-gray-100 hover:bg-primary-blue-800 hover:shadow-sm hover:shadow-primary-blue-300;
   }
+  .btn-danger {
+    @apply px-4 py-3 bg-primary-gray-0 border border-error text-error;
+  }
   .btn-secondary {
     @apply px-4 py-3 bg-primary-gray-500 text-white hover:bg-primary-gray-800 hover:shadow-sm hover:shadow-primary-gray-300;
   }
