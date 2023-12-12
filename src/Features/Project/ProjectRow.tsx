@@ -6,6 +6,7 @@ import { textService } from "../../Utils/TextAndNumber";
 import { timeService } from "../../Utils/TimeService";
 import ConfirmDelete from "../Shared/UI/ConfirmDelete";
 import Modal from "../Shared/UI/Modal";
+import useDeleteProject from "./Hooks/useDeleteProject";
 interface IProps {
   index: number;
   project: IOwnerProjects;
@@ -19,7 +20,7 @@ const ProjectRow = ({ index, project }: IProps) => {
   const toggleDeleteModal = (preferredValue?: boolean) => {
     setIsDeleteModalOpen((perviousValue) => preferredValue ?? !perviousValue);
   };
-
+  const { isPending, mutate: deleteProject } = useDeleteProject();
   return (
     <Fragment>
       <td>{index + 1}</td>
@@ -64,8 +65,12 @@ const ProjectRow = ({ index, project }: IProps) => {
           >
             <ConfirmDelete
               title={project.title}
-              onConfirm={() => {}}
+              onConfirm={() => {
+                deleteProject(project._id);
+                setIsDeleteModalOpen(false);
+              }}
               onCancel={() => setIsDeleteModalOpen(false)}
+              isConfirmButtonDisabled={isPending}
             />
           </Modal>
         </div>

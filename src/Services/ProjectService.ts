@@ -8,3 +8,8 @@ export const getOwnerProjects = async (): Promise<
 > => {
   return (await http.get(API.projects.getOwnerProjects)).data;
 };
+export const deleteOwnerProject = async (
+  projectId: string
+): Promise<Success<{ message: string }>> => {
+  return (await http.delete(`/project/${projectId}`)).data;
+};
