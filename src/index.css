@@ -26,6 +26,7 @@
     --primary-gray-200: 229, 231, 235;
     --primary-gray-100: 243, 244, 246;
     --primary-gray-50: 249, 250, 251;
+    --primary-gray-0: 255, 255, 255;
     --success: 0, 192, 115;
     --warning: 255, 153, 0;
     --error: 255, 71, 87;
@@ -52,8 +53,19 @@
     @apply px-4 py-3 bg-primary-gray-500 text-white hover:bg-primary-gray-800 hover:shadow-sm hover:shadow-primary-gray-300;
   }
   .badge {
+    @apply inline-block whitespace-nowrap rounded-xl px-2 py-0.5;
   }
-  .badge-primary {
+  .badge--primary {
+    @apply bg-primary-900 text-white;
+  }
+  .badge--secondary {
+    @apply bg-primary-gray-200 text-primary-gray-600;
+  }
+  .badge--success {
+    @apply bg-green-500 text-white;
+  }
+  .badge--danger {
+    @apply bg-red-500 text-white;
   }
 }
 
@@ -65,4 +77,33 @@ body {
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
   background-color: rgb(var(--background-app-rgb));
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table .title-row {
+  background-color: rgb(var(--color-primary-gray-100));
+}
+
+table td,
+table th {
+  border-bottom: 1px solid rgb(var(--color-primary-gray-200));
+  text-align: right;
+  white-space: nowrap;
+}
+
+table th {
+  padding: 0.6rem 1rem;
+  color: rgb(var(--color-primary-gray-600));
+  font-size: 0.9rem;
+}
+
+table td {
+  font-size: 0.85rem;
+  padding: 1rem 1rem;
+  color: rgb(var(--color-primary-gray-600));
 }

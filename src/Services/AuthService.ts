@@ -5,6 +5,7 @@ import {
   ISendOtpRequestedData,
   ISendOtpResponse,
   IUserData,
+  IUserProfile,
 } from "../Types/Server/User";
 import { Success } from "../Types/Shared/IApiResponse";
 import http from "./HttpServices";
@@ -12,16 +13,19 @@ import http from "./HttpServices";
 export const sendOtp = async (
   data: ISendOtpRequestedData
 ): Promise<Success<ISendOtpResponse>> => {
-  return (await http.post(API.sendOtp, data)).data;
+  return (await http.post(API.user.sendOtp, data)).data;
 };
 
 export const checkOtp = async (
   data: ICheckOtpRequestedData
 ): Promise<Success<IUserData>> => {
-  return (await http.post(API.checkOtp, data)).data;
+  return (await http.post(API.user.checkOtp, data)).data;
 };
 export const completeProfile = async (
   data: ICompleteProfileRequiredData
 ): Promise<Success<IUserData>> => {
-  return (await http.post(API.completeProfile, data)).data;
+  return (await http.post(API.user.completeProfile, data)).data;
+};
+export const GetUserProfile = async (): Promise<Success<IUserProfile>> => {
+  return (await http.get(`${API.user.userProfile}`)).data;
 };

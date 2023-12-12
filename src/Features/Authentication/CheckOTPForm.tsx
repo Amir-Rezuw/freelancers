@@ -39,7 +39,7 @@ const CheckOTPForm = ({
       });
 
       if (!data.user.isActive) {
-        toast.success(data.message);
+        toast.success(data.message ?? "خوش آمدید");
         navigate(`/complete-profile`);
         return;
       }

@@ -12,7 +12,25 @@ export interface ICheckOtpRequestedData {
   phoneNumber: string;
   otp: string;
 }
-
+export interface IUser {
+  avatarUrl: string | null;
+  biography: string | null;
+  createdAt: string;
+  email: string;
+  isActive: boolean;
+  isVerifiedPhoneNumber: boolean;
+  name: string;
+  phoneNumber: string;
+  resetLink: string | null;
+  role: UserTypes;
+  status: Statuses;
+  updatedAt: string;
+  __v: number;
+  _id: string;
+}
+export interface IUserProfile {
+  user: IUser;
+}
 export interface IUserData {
   message: string;
   user: {

@@ -44,6 +44,7 @@ export default {
           200: withOpacity("--primary-gray-200"),
           100: withOpacity("--primary-gray-100"),
           50: withOpacity("--primary-gray-50"),
+          0: withOpacity("--primary-gray-0"),
         },
         success: withOpacity("--success"),
         warning: withOpacity("--warning"),

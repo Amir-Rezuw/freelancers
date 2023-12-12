@@ -1,4 +1,5 @@
 import { FormEvent, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toast";
 import { UserTypes } from "../../Constants/Enums/Shared";
 import { ICompleteProfileRequiredData } from "../../Types/Server/User";
@@ -11,6 +12,7 @@ import useCompleteProfile from "./Hooks/useCompleteProfile";
 const CompleteProfileForm = () => {
   const nameInput = useRef<HTMLInputElement>(null);
   const emailInput = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
   const [role, setRole] = useState<UserTypes>(UserTypes.freelancer);
   const onSelectRole = (target: HTMLInputElement) => {
     const value = target.value as UserTypes;
@@ -26,7 +28,8 @@ const CompleteProfileForm = () => {
     };
     try {
       const response = await mutateAsync(data);
-      toast.success(response.data.message);
+      toast.success(response.data.message ?? "موفق");
+      navigate(`/${role.toString().toLowerCase()}`);
     } catch (error) {
       toast.error(useErrorType(e));
     }
