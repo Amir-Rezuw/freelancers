@@ -1,29 +1,36 @@
-import { FormEvent, useRef, useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toast";
 import { UserTypes } from "../../Constants/Enums/Shared";
+import { MessagesText } from "../../Constants/Messages";
 import { ICompleteProfileRequiredData } from "../../Types/Server/User";
 import useErrorType from "../Shared/Hooks/useErrorType";
 import LabeledInput from "../Shared/UI/LabeledInput";
 import Loading from "../Shared/UI/Loading";
 import Radio from "../Shared/UI/Radio";
 import useCompleteProfile from "./Hooks/useCompleteProfile";
-
+interface IFormData {
+  name: string;
+  email: string;
+}
 const CompleteProfileForm = () => {
-  const nameInput = useRef<HTMLInputElement>(null);
-  const emailInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormData>();
   const [role, setRole] = useState<UserTypes>(UserTypes.freelancer);
   const onSelectRole = (target: HTMLInputElement) => {
     const value = target.value as UserTypes;
     setRole(value);
   };
   const { mutateAsync, isPending } = useCompleteProfile();
-  const onCompleteProfileSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const onCompleteProfileSubmit = async ({ email, name }: IFormData) => {
     const data: ICompleteProfileRequiredData = {
-      email: emailInput.current?.value ?? "",
-      name: nameInput.current?.value ?? "",
+      email,
+      name,
       role,
     };
     try {
@@ -31,32 +38,44 @@ const CompleteProfileForm = () => {
       toast.success(response.data.message ?? "موفق");
       navigate(`/${role.toString().toLowerCase()}`);
     } catch (error) {
-      toast.error(useErrorType(e));
+      toast.error(useErrorType(error));
     }
   };
 
   return (
     <form
       className="space-y-8"
-      onSubmit={onCompleteProfileSubmit}
+      onSubmit={handleSubmit(onCompleteProfileSubmit)}
     >
       <div>
         <LabeledInput
-          ref={nameInput}
+          register={register}
           inputDirection="rtl"
           label="نام و نام خانوادگی"
           name="name"
+          error={errors.name?.message}
+          validation={{
+            required: MessagesText.RequiredFieldError,
+          }}
           type="text"
         />
       </div>
 
       <div>
         <LabeledInput
-          ref={emailInput}
+          register={register}
           inputDirection="ltr"
           label="ایمیل"
           name="email"
           type="email"
+          error={errors.email?.message}
+          validation={{
+            required: MessagesText.RequiredFieldError,
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: MessagesText.EmailFormatError,
+            },
+          }}
         />
       </div>
       <div className="flex items-center gap-x-7">

@@ -7,7 +7,7 @@ import { checkOtp } from "../../../Services/AuthService";
 
 const useCheckOtp = () => {
   const mutationKey = useMemo(
-    () => [`${environment.baseUrl}${API.checkOtp}`],
+    () => [`${environment.baseUrl}${API.user.checkOtp}`],
     []
   );
   return useMutation({

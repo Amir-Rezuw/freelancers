@@ -1,4 +1,5 @@
-import { FormEvent, Fragment, useRef } from "react";
+import { Fragment, useRef } from "react";
+import { useForm } from "react-hook-form";
 import { HiArrowRight } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toast";
@@ -8,33 +9,30 @@ import useErrorType from "../Shared/Hooks/useErrorType";
 import useInterval from "../Shared/Hooks/useInterval";
 import Loading from "../Shared/UI/Loading";
 import OTPInputs from "../Shared/UI/OTPInputs";
+import { useAuthCtx } from "./Context/Auth.ctx";
 import useCheckOtp from "./Hooks/useCheckOtp";
-const CheckOTPForm = ({
-  phoneNumber,
-  onBackBtnPress,
-  resendCode,
-}: {
-  phoneNumber: string;
-  onBackBtnPress: () => void;
-  resendCode: (e: FormEvent) => void;
-}) => {
+import useOtpSender from "./Hooks/useOtpSender";
+interface IFormData {}
+const CheckOTPForm = () => {
+  const { otpSender } = useOtpSender();
+  const { phoneNumber } = useAuthCtx();
   const finalCode = useRef(0);
   const navigate = useNavigate();
   const { mutateAsync, isPending } = useCheckOtp();
+  const { handleSubmit } = useForm<IFormData>();
   const { reset: resetTimer, timer: resendTimer } = useInterval({
     delay: 1000,
     duration: environment.OtpResendTimer,
     step: 1,
   });
-  const onCheckCode = async (e: FormEvent) => {
-    e.preventDefault();
+  const onCheckCode = async () => {
     if (finalCode.current.toString().length !== environment.OtpLength) {
       toast.error("کد وارد شده اشتباه میباشد");
       return;
     }
     try {
       const { data } = await mutateAsync({
-        phoneNumber,
+        phoneNumber: phoneNumber ?? "",
         otp: `${finalCode.current}`,
       });
 
@@ -64,8 +62,9 @@ const CheckOTPForm = ({
         navigate("/freelancer");
         return;
       }
+      // useCheckResult(data);
     } catch (error) {
-      toast.error(useErrorType(e));
+      toast.error(useErrorType(error));
     }
   };
 
@@ -73,14 +72,14 @@ const CheckOTPForm = ({
     <Fragment>
       <button
         className="flex items-center w-4/12 justify-between text-warning self-start"
-        onClick={onBackBtnPress}
+        onClick={() => navigate("/auth")}
       >
         <HiArrowRight />
         <p>ویرایش شماره</p>
       </button>
       <form
         className="space-y-3"
-        onSubmit={onCheckCode}
+        onSubmit={handleSubmit(onCheckCode)}
       >
         <div className="mt-4">
           <p className="font-bold text-primary-gray-800">
@@ -94,9 +93,7 @@ const CheckOTPForm = ({
               fieldLength={6}
               finalCodeRef={finalCode}
               inputClassNames="text-input w-14 mx-1 text-center"
-            >
-              {/* <span className="flex items-center justify-center">-</span> */}
-            </OTPInputs>
+            />
           </div>
         </div>
         <div>
@@ -106,7 +103,8 @@ const CheckOTPForm = ({
             <button
               type="button"
               onClick={(e) => {
-                resendCode(e);
+                e.preventDefault();
+                otpSender({ phoneNumber: phoneNumber ?? "" });
                 resetTimer();
               }}
               className="text-primary-blue-700"

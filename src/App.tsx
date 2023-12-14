@@ -5,12 +5,14 @@ import { ToastContainer } from "react-toast";
 import "./App.css";
 
 import { environment } from "./Environment/env";
-import AppLayout from "./Features/Shared/UI/AppLayout";
-import Auth from "./Pages/Auth";
+import AuthLayout from "./Features/Authentication/Layout/Auth.leyout";
+import AppLayout from "./Features/Shared/UI/Layouts/AppLayout";
+import CheckOtp from "./Pages/Auth/CheckOtp";
+import SendOtp from "./Pages/Auth/SendOtp";
 import CompleteProfile from "./Pages/CompleteProfile";
 import Home from "./Pages/Home";
 import NotFound from "./Pages/NotFound";
-import Owner from "./Pages/Owner/OwnerDashboard";
+import Owner from "./Pages/Owner/Dashboard";
 import Projects from "./Pages/Owner/Projects";
 import SingleProject from "./Pages/Owner/SingleProject";
 const queryClient = new QueryClient();
@@ -29,8 +31,17 @@ function App() {
         />
         <Route
           path="/auth"
-          element={<Auth />}
-        />
+          element={<AuthLayout />}
+        >
+          <Route
+            index
+            element={<SendOtp />}
+          />
+          <Route
+            path="check-otp"
+            element={<CheckOtp />}
+          />
+        </Route>
         <Route
           path="/complete-profile"
           element={<CompleteProfile />}

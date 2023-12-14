@@ -1,10 +1,12 @@
+import { Fragment } from "react";
 import ProjectsTable from "../../Features/Project/ProjectTable";
-
+import ProjectsHeader from "../../Features/Project/ProjectsHeader";
 const Projects = () => {
   return (
-    <div>
+    <Fragment>
+      <ProjectsHeader />
       <ProjectsTable />
-    </div>
+    </Fragment>
   );
 };
 

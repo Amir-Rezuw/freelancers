@@ -1,42 +1,52 @@
-import { FormEvent, Fragment, HTMLInputTypeAttribute, forwardRef } from "react";
+import { HTMLInputTypeAttribute } from "react";
+import {
+  FieldValues,
+  Path,
+  RegisterOptions,
+  UseFormRegister,
+} from "react-hook-form";
 
-interface IProps {
+interface IProps<T extends FieldValues> {
   label: string;
-  name: string;
+  name: Path<T>;
   value?: string;
-  onChange?: (e: FormEvent<HTMLInputElement>) => void;
+  error?: string;
   type: HTMLInputTypeAttribute;
   inputDirection: "rtl" | "ltr";
-
-  [key: string]: any;
+  register: UseFormRegister<T>;
+  required?: boolean;
+  validation?: RegisterOptions;
 }
 
-const LabeledInput = forwardRef<HTMLInputElement | null, IProps>(
-  (
-    { label, name, onChange, value, type, inputDirection, ...rest }: IProps,
-    ref
-  ) => {
-    return (
-      <Fragment>
-        <label
-          className="mb-2 block"
-          htmlFor={name}
-        >
-          {label}
-        </label>
-        <input
-          dir={inputDirection}
-          onChange={onChange}
-          value={value}
-          id={name}
-          className="text-input w-full"
-          type={type}
-          ref={ref}
-          {...rest}
-        />
-      </Fragment>
-    );
-  }
-);
-
+const LabeledInput = <T extends FieldValues>({
+  label,
+  name,
+  value,
+  type,
+  inputDirection,
+  register,
+  validation,
+  required = true,
+  error,
+}: IProps<T>) => {
+  return (
+    <div className="flex flex-col gap-y-2">
+      <label
+        className="block"
+        htmlFor={name}
+      >
+        {label} {required && <span className="text-error">*</span>}
+      </label>
+      <input
+        dir={inputDirection}
+        defaultValue={value}
+        id={name}
+        className="text-input w-full"
+        type={type}
+        {...register(name, validation)}
+      />
+      {error && <div className="text-error text-xs ">{error}</div>}
+    </div>
+  );
+};
 export default LabeledInput;

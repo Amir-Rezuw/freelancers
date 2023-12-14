@@ -7,7 +7,7 @@ import { sendOtp } from "../../../Services/AuthService";
 
 const useSendOtp = () => {
   const mutationKey = useMemo(
-    () => [`${environment.baseUrl}${API.sendOtp}`],
+    () => [`${environment.baseUrl}${API.user.sendOtp}`],
     []
   );
   return useMutation({

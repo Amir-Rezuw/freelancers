@@ -69,7 +69,7 @@ const OTPInputs = ({
               onChange={(e) => onInputChange(e, index)}
               value={otp[index]}
               onKeyUp={onKeyup}
-              onClick={(e) => {
+              onClick={() => {
                 if (activeOtpInput !== index) {
                   inputRef.current?.focus();
                 }

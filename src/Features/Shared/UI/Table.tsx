@@ -6,7 +6,7 @@ interface IProps {
 }
 const Table = ({ children, className }: IProps) => {
   return (
-    <div className={`bg-primary-gray-0 overflow-x-auto ${className}`}>
+    <div className={`overflow-x-auto ${className}`}>
       <table>{children}</table>
     </div>
   );

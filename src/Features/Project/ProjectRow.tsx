@@ -4,6 +4,7 @@ import { TbPencilMinus } from "react-icons/tb";
 import { IOwnerProjects } from "../../Types/Server/Projects";
 import { textService } from "../../Utils/TextAndNumber";
 import { timeService } from "../../Utils/TimeService";
+import useToggleState from "../Shared/Hooks/useToggleState";
 import ConfirmDelete from "../Shared/UI/ConfirmDelete";
 import Modal from "../Shared/UI/Modal";
 import useDeleteProject from "./Hooks/useDeleteProject";
@@ -15,10 +16,10 @@ const ProjectRow = ({ index, project }: IProps) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const toggleEditModal = (preferredValue?: boolean) => {
-    setIsEditModalOpen((perviousValue) => preferredValue ?? !perviousValue);
+    useToggleState(setIsEditModalOpen, preferredValue);
   };
   const toggleDeleteModal = (preferredValue?: boolean) => {
-    setIsDeleteModalOpen((perviousValue) => preferredValue ?? !perviousValue);
+    useToggleState(setIsDeleteModalOpen, preferredValue);
   };
   const { isPending, mutate: deleteProject } = useDeleteProject();
   return (
