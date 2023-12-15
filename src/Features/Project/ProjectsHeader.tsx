@@ -24,6 +24,7 @@ const ProjectsHeader = () => {
         </button>
       </div>
       <Modal
+        className="min-w-[40rem]"
         isOpen={isAddProjectModalOpen}
         modalToggler={toggleAddProjectModal}
         modalHeaderTitle="افزودن پروژه‌ی جدید"

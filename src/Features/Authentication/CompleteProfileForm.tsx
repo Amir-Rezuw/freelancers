@@ -50,7 +50,7 @@ const CompleteProfileForm = () => {
       <div>
         <LabeledInput
           register={register}
-          inputDirection="rtl"
+          dir="rtl"
           label="نام و نام خانوادگی"
           name="name"
           error={errors.name?.message}
@@ -64,7 +64,7 @@ const CompleteProfileForm = () => {
       <div>
         <LabeledInput
           register={register}
-          inputDirection="ltr"
+          dir="ltr"
           label="ایمیل"
           name="email"
           type="email"

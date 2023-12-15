@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { MessagesText } from "../../Constants/Messages";
 import LabeledInput from "../Shared/UI/LabeledInput";
 import Loading from "../Shared/UI/Loading";
 import { useAuthCtx } from "./Context/Auth.ctx";
@@ -24,7 +25,7 @@ const SendOTPForm = () => {
     >
       <div>
         <LabeledInput
-          inputDirection="ltr"
+          dir="ltr"
           label="شماره موبایل"
           error={errors.phoneNumber?.message}
           name="phoneNumber"
@@ -32,11 +33,10 @@ const SendOTPForm = () => {
           value={phoneNumber}
           register={register}
           validation={{
-            required: "این فیلد اجباری میباشد",
+            required: MessagesText.RequiredFieldError,
             pattern: {
               value: /^09\d{9}$/,
-              message:
-                "شماره وارد شده باید با ۰۹ شروع بشود و بیشتر یا کمتر از یازده رقم نباشد.",
+              message: MessagesText.PhoneNumberFormatError,
             },
           }}
         />

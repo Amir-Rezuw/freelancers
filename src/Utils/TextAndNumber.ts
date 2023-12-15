@@ -8,8 +8,9 @@ export const textService = {
       .toString()
       .replace(/[۰-۹]/g, (item) => "۰۱۲۳۴۵۶۷۸۹".indexOf(item).toString());
   },
-  addCommas: (digit: string | number) => {
-    const numericValue = +digit;
-    return numericValue.toLocaleString();
+  addCommas: (digit: string) => {
+    const numericValue = `${digit}`.replace(/\D/g, "");
+    const formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return formattedValue;
   },
 };

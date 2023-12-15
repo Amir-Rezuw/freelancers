@@ -4,6 +4,7 @@ import { HiArrowRight } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toast";
 import { Statuses, UserTypes } from "../../Constants/Enums/Shared";
+import { MessagesText } from "../../Constants/Messages";
 import { environment } from "../../Environment/env";
 import useErrorType from "../Shared/Hooks/useErrorType";
 import useInterval from "../Shared/Hooks/useInterval";
@@ -37,28 +38,26 @@ const CheckOTPForm = () => {
       });
 
       if (!data.user.isActive) {
-        toast.success(data.message ?? "خوش آمدید");
+        toast.success(data.message ?? MessagesText.Welcome);
         navigate(`/complete-profile`);
         return;
       }
       if (data.user.status === Statuses.PENDING) {
-        toast.warn("پروفایل شما در انتظار تایید است لطفا صبور باشید.");
+        toast.warn(MessagesText.PendingProfileError);
         return;
       }
       if (data.user.status === Statuses.REJECTED) {
-        toast.error(
-          "پروفایل شما توسط ادمین مسدود شده است لطفا با پشتیبانی تماس بگیرید."
-        );
+        toast.error(MessagesText.BannedProfileError);
         return;
       }
       if (data.user.role === UserTypes.owner) {
-        toast.success("خوش آمدید");
+        toast.success(MessagesText.Welcome);
         navigate("/owner");
         return;
       }
 
       if (data.user.role === UserTypes.freelancer) {
-        toast.success("خوش آمدید");
+        toast.success(MessagesText.Welcome);
         navigate("/freelancer");
         return;
       }

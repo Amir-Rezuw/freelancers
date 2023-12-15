@@ -1,4 +1,4 @@
-import { ChangeEvent, HTMLInputTypeAttribute } from "react";
+import { ChangeEvent, Fragment, HTMLInputTypeAttribute } from "react";
 import {
   FieldValues,
   Path,
@@ -20,21 +20,18 @@ interface IProps<T extends FieldValues> {
   className?: string;
 }
 
-const LabeledInput = <T extends FieldValues>({
+const Textarea = <T extends FieldValues>({
+  dir,
   label,
   name,
-  value,
-  type,
-  dir: inputDirection,
   register,
-  validation,
-  required = true,
   error,
-  onChange,
-  className,
+  required = true,
+  validation,
+  value,
 }: IProps<T>) => {
   return (
-    <div className={`flex flex-col gap-y-2 ${className}`}>
+    <Fragment>
       <label
         className="block"
         htmlFor={name}
@@ -42,17 +39,16 @@ const LabeledInput = <T extends FieldValues>({
         {label} {required && <span className="text-error">*</span>}
       </label>
 
-      <input
-        dir={inputDirection}
+      <textarea
+        dir={dir}
         defaultValue={value}
         id={name}
         className="text-input w-full"
-        type={type}
         {...register(name, validation)}
-        onChange={onChange}
       />
       {error && <div className="text-error text-xs">{error}</div>}
-    </div>
+    </Fragment>
   );
 };
-export default LabeledInput;
+
+export default Textarea;
