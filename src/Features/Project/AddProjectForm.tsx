@@ -1,20 +1,28 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Value } from "react-multi-date-picker";
+import { TagsInput } from "react-tag-input-component";
 import { MessagesText } from "../../Constants/Messages";
 import { textService } from "../../Utils/TextAndNumber";
+import DatePicker from "../Shared/UI/DatePicker";
 import LabeledInput from "../Shared/UI/LabeledInput";
+import Select from "../Shared/UI/Select";
 import Textarea from "../Shared/UI/Textarea";
 interface IFormData {
   title: string;
   description: string;
   budget: number;
+  category: string;
 }
 const AddProjectForm = () => {
+  const [tags, setTags] = useState<string[]>([]);
+  const [date, setDate] = useState<Value>(new Date());
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormData>();
+
   const onSubmit = (data: IFormData) => {
     console.log(data);
   };
@@ -24,7 +32,7 @@ const AddProjectForm = () => {
       className="flex flex-col gap-y-5"
     >
       <div className="flex flex-col gap-y-3">
-        <div className="flex justify-between gap-x-4">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2">
           <LabeledInput
             className="w-full"
             dir="rtl"
@@ -55,19 +63,38 @@ const AddProjectForm = () => {
               e.target.value = formattedValue;
             }}
           />
-        </div>
-        <div>
-          <Textarea
-            dir="rtl"
-            label="توضیحات"
-            name="description"
+          <Select
+            label="دسته بندی"
+            name="category"
+            options={[]}
             register={register}
-            type="text"
-            error={errors.description?.message}
-            validation={{
-              required: "پس توضیحات؟ 🗿",
-            }}
+            validation={{}}
           />
+          <div className=" flex flex-col justify-between ">
+            <label htmlFor="tags">تگ ها</label>
+            <TagsInput
+              value={tags}
+              onChange={setTags}
+            />
+          </div>
+          <DatePicker
+            date={date}
+            label="مهلت"
+            setDate={setDate}
+          />
+          <div className="col-span-2">
+            <Textarea
+              dir="rtl"
+              label="توضیحات"
+              name="description"
+              register={register}
+              type="text"
+              error={errors.description?.message}
+              validation={{
+                required: "پس توضیحات؟ 🗿",
+              }}
+            />
+          </div>
         </div>
       </div>
       <button className="btn btn-primary">افزودن</button>

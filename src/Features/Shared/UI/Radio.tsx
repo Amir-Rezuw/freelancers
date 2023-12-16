@@ -1,36 +1,47 @@
-import { ChangeEvent, Fragment } from "react";
+import {
+  FieldValues,
+  Path,
+  RegisterOptions,
+  UseFormRegister,
+  WatchInternal,
+} from "react-hook-form";
 import { UserTypes } from "../../../Constants/Enums/Shared";
+import ErrorLabel from "./ErrorLabel";
 
-interface IProps {
+interface IProps<T extends FieldValues> {
   label: string;
-  onChange: (e: ChangeEvent) => void;
   classNames?: string;
-  name: string;
+  name: Path<T>;
   value: UserTypes;
-  [key: string]: any;
+  register: UseFormRegister<T>;
+  validation?: RegisterOptions;
+  errorMessage?: string;
+  watch: WatchInternal<T>;
 }
 
-const Radio = ({
+const Radio = <T extends FieldValues>({
   classNames,
   label,
   value,
-  onChange,
   name,
-  ...rest
-}: IProps) => {
+  register,
+  validation,
+  errorMessage,
+  watch,
+}: IProps<T>) => {
   return (
-    <Fragment>
+    <div className="gap-x-2 flex items-center cursor-pointer text-primary-gray-600">
       <input
         className={`form-radio text-primary-blue-600 focus:ring-primary-blue-600 ${classNames}`}
-        name={name}
-        onChange={onChange}
         type="radio"
         value={value}
+        checked={watch(name) === value}
         id={value}
-        {...rest}
+        {...register(name, validation)}
       />
       <label htmlFor={value}>{label}</label>
-    </Fragment>
+      {errorMessage && <ErrorLabel message={errorMessage} />}
+    </div>
   );
 };
 

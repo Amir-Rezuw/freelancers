@@ -5,6 +5,7 @@ import {
   RegisterOptions,
   UseFormRegister,
 } from "react-hook-form";
+import ErrorLabel from "./ErrorLabel";
 
 interface IProps<T extends FieldValues> {
   label: string;
@@ -51,7 +52,7 @@ const LabeledInput = <T extends FieldValues>({
         {...register(name, validation)}
         onChange={onChange}
       />
-      {error && <div className="text-error text-xs">{error}</div>}
+      {error && <ErrorLabel message={error} />}
     </div>
   );
 };

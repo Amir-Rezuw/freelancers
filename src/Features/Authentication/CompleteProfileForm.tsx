@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toast";
@@ -13,6 +12,7 @@ import useCompleteProfile from "./Hooks/useCompleteProfile";
 interface IFormData {
   name: string;
   email: string;
+  role: UserTypes;
 }
 const CompleteProfileForm = () => {
   const navigate = useNavigate();
@@ -20,14 +20,11 @@ const CompleteProfileForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<IFormData>();
-  const [role, setRole] = useState<UserTypes>(UserTypes.freelancer);
-  const onSelectRole = (target: HTMLInputElement) => {
-    const value = target.value as UserTypes;
-    setRole(value);
-  };
+
   const { mutateAsync, isPending } = useCompleteProfile();
-  const onCompleteProfileSubmit = async ({ email, name }: IFormData) => {
+  const onCompleteProfileSubmit = async ({ email, name, role }: IFormData) => {
     const data: ICompleteProfileRequiredData = {
       email,
       name,
@@ -79,27 +76,27 @@ const CompleteProfileForm = () => {
         />
       </div>
       <div className="flex items-center gap-x-7">
-        <div className="gap-x-2 flex items-center cursor-pointer text-primary-gray-600">
-          <Radio
-            label="کارفرما"
-            name="role"
-            onChange={({ target }) => {
-              onSelectRole(target as HTMLInputElement);
-            }}
-            value={UserTypes.owner}
-          />
-        </div>
-        <div className="gap-x-2 flex items-center cursor-pointer text-primary-gray-600">
-          <Radio
-            checked={role === UserTypes.freelancer}
-            value={UserTypes.freelancer}
-            label="فریلنسر"
-            name="role"
-            onChange={({ target }) => {
-              onSelectRole(target as HTMLInputElement);
-            }}
-          />
-        </div>
+        <Radio
+          watch={watch}
+          errorMessage={errors.role?.message}
+          name="role"
+          label="کارفرما"
+          value={UserTypes.owner}
+          register={register}
+          validation={{
+            required: MessagesText.RequiredFieldError,
+          }}
+        />
+
+        <Radio
+          errorMessage={errors.role?.message}
+          watch={watch}
+          name="role"
+          value={UserTypes.freelancer}
+          label="فریلنسر"
+          register={register}
+          validation={{ required: MessagesText.RequiredFieldError }}
+        />
       </div>
       <button
         className="btn btn-primary w-full"

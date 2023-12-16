@@ -32,3 +32,11 @@ export interface IOwnerProjects {
   freelancer: any;
   _id: string;
 }
+export interface IAddProjectRequiredData {
+  title: string;
+  description: string;
+  tags: string[];
+  category: string;
+  deadline: string;
+  budget: number;
+}

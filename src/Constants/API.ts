@@ -7,6 +7,7 @@ const API = {
   },
   projects: {
     getOwnerProjects: "project/owner-projects",
+    addOwnerProject: "project/add",
   },
 };
 export default API;
