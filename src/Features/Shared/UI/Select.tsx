@@ -1,17 +1,16 @@
-import { Fragment } from "react";
+import { ReactNode } from "react";
 import {
   FieldValues,
   Path,
   RegisterOptions,
   UseFormRegister,
 } from "react-hook-form";
-import { ICategory } from "../../../Types/Server/Projects";
 
 interface IProps<T extends FieldValues> {
   register: UseFormRegister<T>;
   label: string;
   name: Path<T>;
-  options: ICategory[];
+  children: ReactNode;
   validation: RegisterOptions;
   required?: boolean;
 }
@@ -19,8 +18,8 @@ interface IProps<T extends FieldValues> {
 const Select = <T extends FieldValues>({
   label,
   name,
-  options,
   required = true,
+  children,
   register,
   validation,
 }: IProps<T>) => {
@@ -37,14 +36,29 @@ const Select = <T extends FieldValues>({
         className="text-input w-full"
         id={name}
       >
-        {options.map((item) => (
-          <Fragment key={item._id}>
-            <option value={item.englishTitle}>{item.title}</option>
-          </Fragment>
-        ))}
+        {children}
       </select>
     </div>
   );
 };
 
 export default Select;
+const Option = ({
+  value,
+  children,
+  className,
+}: {
+  value: string;
+  className?: string;
+  children: ReactNode;
+}) => {
+  return (
+    <option
+      className={className}
+      value={value}
+    >
+      {children}
+    </option>
+  );
+};
+Select.Option = Option;

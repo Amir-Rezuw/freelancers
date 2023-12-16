@@ -1,31 +1,48 @@
-import { ChangeEvent, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Value } from "react-multi-date-picker";
+import {
+  ChangeEvent,
+  Dispatch,
+  Fragment,
+  SetStateAction,
+  useEffect,
+} from "react";
+import { Controller, useForm } from "react-hook-form";
 import { TagsInput } from "react-tag-input-component";
 import { MessagesText } from "../../Constants/Messages";
+import { IAddProjectRequiredData } from "../../Types/Server/Projects";
 import { textService } from "../../Utils/TextAndNumber";
 import DatePicker from "../Shared/UI/DatePicker";
 import LabeledInput from "../Shared/UI/LabeledInput";
+import Loading from "../Shared/UI/Loading";
 import Select from "../Shared/UI/Select";
 import Textarea from "../Shared/UI/Textarea";
-interface IFormData {
-  title: string;
-  description: string;
-  budget: number;
-  category: string;
-}
-const AddProjectForm = () => {
-  const [tags, setTags] = useState<string[]>([]);
-  const [date, setDate] = useState<Value>(new Date());
+import useAddProject from "./Hooks/useAddProject";
+import useGetCategoryList from "./Hooks/useGetCategoryList";
+
+const AddProjectForm = ({
+  modalStateSetterFn,
+}: {
+  modalStateSetterFn: Dispatch<SetStateAction<boolean>>;
+}) => {
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormData>();
-
-  const onSubmit = (data: IFormData) => {
-    console.log(data);
+  } = useForm<IAddProjectRequiredData>();
+  const { data } = useGetCategoryList();
+  const { mutateAsync, isPending, isSuccess } = useAddProject();
+  const onSubmit = (data: IAddProjectRequiredData) => {
+    const serverData = {
+      ...data,
+      budget: +(data.budget as string).split(",").join(""),
+    };
+    mutateAsync(serverData);
   };
+  useEffect(() => {
+    if (isSuccess) {
+      modalStateSetterFn(false);
+    }
+  }, [isSuccess]);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -45,43 +62,65 @@ const AddProjectForm = () => {
               required: MessagesText.RequiredFieldError,
             }}
           />
-
           <LabeledInput
             dir="ltr"
             className="w-full"
-            label="بودجه"
+            label="بودجه به تومان"
             name="budget"
             register={register}
             type="text"
-            error={errors.budget?.message}
-            validation={{
-              required: MessagesText.RequiredFieldError,
-            }}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               const formattedValue = textService.addCommas(e.target.value);
 
               e.target.value = formattedValue;
             }}
+            error={errors.budget?.message}
+            validation={{
+              required: MessagesText.RequiredFieldError,
+            }}
           />
+
           <Select
             label="دسته بندی"
             name="category"
-            options={[]}
             register={register}
-            validation={{}}
-          />
+            validation={{ required: MessagesText.RequiredFieldError }}
+          >
+            {data?.data.categories.map((item) => (
+              <Fragment key={item._id}>
+                <Select.Option value={item._id}>{item.title}</Select.Option>
+              </Fragment>
+            ))}
+          </Select>
+
           <div className=" flex flex-col justify-between ">
             <label htmlFor="tags">تگ ها</label>
-            <TagsInput
-              value={tags}
-              onChange={setTags}
+            <Controller
+              control={control}
+              name="tags"
+              render={({ field: { onChange, value } }) => {
+                return (
+                  <TagsInput
+                    value={value ?? []}
+                    onChange={onChange}
+                  />
+                );
+              }}
             />
           </div>
-          <DatePicker
-            date={date}
-            label="مهلت"
-            setDate={setDate}
-          />
+          <div className="col-span-2">
+            <Controller
+              control={control}
+              name="deadline"
+              render={({ field: { onChange, value } }) => (
+                <DatePicker
+                  date={value}
+                  label="مهلت"
+                  onChange={onChange}
+                />
+              )}
+            />
+          </div>
           <div className="col-span-2">
             <Textarea
               dir="rtl"
@@ -97,7 +136,12 @@ const AddProjectForm = () => {
           </div>
         </div>
       </div>
-      <button className="btn btn-primary">افزودن</button>
+      <button
+        className="btn btn-primary"
+        disabled={isPending}
+      >
+        {isPending ? <Loading /> : "افزودن"}
+      </button>
     </form>
   );
 };

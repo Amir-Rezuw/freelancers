@@ -29,7 +29,7 @@ const ProjectsHeader = () => {
         modalToggler={toggleAddProjectModal}
         modalHeaderTitle="افزودن پروژه‌ی جدید"
       >
-        <AddProjectForm />
+        <AddProjectForm modalStateSetterFn={setIsAddProjectModalOpen} />
       </Modal>
     </Fragment>
   );

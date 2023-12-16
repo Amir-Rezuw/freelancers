@@ -38,5 +38,5 @@ export interface IAddProjectRequiredData {
   tags: string[];
   category: string;
   deadline: string;
-  budget: number;
+  budget: number | string;
 }

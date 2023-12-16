@@ -9,5 +9,8 @@ const API = {
     getOwnerProjects: "project/owner-projects",
     addOwnerProject: "project/add",
   },
+  category: {
+    getAll: "category/list",
+  },
 };
 export default API;

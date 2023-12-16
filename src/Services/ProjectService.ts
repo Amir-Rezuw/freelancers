@@ -1,5 +1,8 @@
 import API from "../Constants/API";
-import { IOwnerProjects } from "../Types/Server/Projects";
+import {
+  IAddProjectRequiredData,
+  IOwnerProjects,
+} from "../Types/Server/Projects";
 import { Success } from "../Types/Shared/IApiResponse";
 import http from "./HttpServices";
 
@@ -12,4 +15,9 @@ export const deleteOwnerProject = async (
   projectId: string
 ): Promise<Success<{ message: string }>> => {
   return (await http.delete(`/project/${projectId}`)).data;
+};
+export const addOwnerProject = async (
+  data: IAddProjectRequiredData
+): Promise<Success<{ message: string }>> => {
+  return (await http.post(API.projects.addOwnerProject, data)).data;
 };

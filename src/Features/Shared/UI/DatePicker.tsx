@@ -1,29 +1,35 @@
-import { Dispatch, SetStateAction } from "react";
 import persian from "react-date-object/calendars/persian";
+
 import persian_fa from "react-date-object/locales/persian_fa";
 import type { Value } from "react-multi-date-picker";
 import MultiDatePicker from "react-multi-date-picker";
 interface IProps {
   label: string;
   date: Value;
-  setDate: Dispatch<SetStateAction<Value>>;
+  onChange: (date?: string) => void;
 }
 
-const DatePicker = ({ label, date, setDate }: IProps) => {
+const DatePicker = ({ label, date, onChange }: IProps) => {
   return (
-    <div>
-      <span className="mb-2 block text-primary-gray-700">{label}</span>
+    <>
+      <span className="mb-2 block text-primary-gray-700">
+        {label} <span className="text-error">*</span>
+      </span>
       <MultiDatePicker
+        minDate={Date.now()}
         containerClassName="w-full"
-        inputClass="text-input"
+        inputClass="text-input w-full"
         value={date}
-        onChange={setDate}
+        onChange={(date) => {
+          if (!date) return;
+          onChange(new Date(date.valueOf() as number).toISOString());
+        }}
         format="YYYY/MM/DD"
         calendar={persian}
         locale={persian_fa}
-        calendarPosition="left-center"
+        calendarPosition="top-right"
       />
-    </div>
+    </>
   );
 };
 
