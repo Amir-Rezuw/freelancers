@@ -42,17 +42,16 @@ const LabeledInput = <T extends FieldValues>({
       >
         {label} {required && <span className="text-error">*</span>}
       </label>
-
+      {error && <ErrorLabel message={error} />}
       <input
         dir={inputDirection}
         defaultValue={value}
         id={name}
-        className="text-input w-full"
+        className={`text-input w-full ${error && "border border-error"}`}
         type={type}
         {...register(name, validation)}
         onChange={onChange}
       />
-      {error && <ErrorLabel message={error} />}
     </div>
   );
 };

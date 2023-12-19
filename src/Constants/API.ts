@@ -8,6 +8,8 @@ const API = {
   projects: {
     getOwnerProjects: "project/owner-projects",
     addOwnerProject: "project/add",
+    editOwnerProject: "project/update",
+    toggleOwnerProject: "project",
   },
   category: {
     getAll: "category/list",

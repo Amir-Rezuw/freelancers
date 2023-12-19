@@ -7,7 +7,9 @@ import { timeService } from "../../Utils/TimeService";
 import useToggleState from "../Shared/Hooks/useToggleState";
 import ConfirmDelete from "../Shared/UI/ConfirmDelete";
 import Modal from "../Shared/UI/Modal";
+import AddProjectForm from "./AddProjectForm";
 import useDeleteProject from "./Hooks/useDeleteProject";
+import ToggleProjectStatus from "./ToggleProjectStatus";
 interface IProps {
   index: number;
   project: IOwnerProjects;
@@ -27,10 +29,10 @@ const ProjectRow = ({ index, project }: IProps) => {
       <td>{index + 1}</td>
       <td>{textService.truncateText(project.title, 30)}</td>
       <td>{project.category.title}</td>
-      <td>{textService.addCommas(project.budget)}</td>
+      <td>{textService.addCommas(project.budget.toString())}</td>
       <td>{timeService.convertIsoToPersian(project.deadline)}</td>
       <td>
-        <div className="flex flex-wrap items-center gap-2 max-w-[200]">
+        <div className="flex flex-wrap items-center gap-2 max-w-[200px]">
           {project.tags.map((tag) => (
             <span
               className="badge badge--secondary"
@@ -43,11 +45,7 @@ const ProjectRow = ({ index, project }: IProps) => {
       </td>
       <td>{project?.freelancer?.name || "-"}</td>
       <td>
-        {project.status === "OPEN" ? (
-          <span className="badge badge--success">باز</span>
-        ) : (
-          <span className="badge badge--danger">بسته</span>
-        )}
+        <ToggleProjectStatus project={project} />
       </td>
       <td className=" flex gap-x-3">
         <div>
@@ -84,12 +82,23 @@ const ProjectRow = ({ index, project }: IProps) => {
             <TbPencilMinus className="w-5 h-5 text-warning" />
           </button>
           <Modal
+            className="min-w-[40rem]"
             isOpen={isEditModalOpen}
-            className="max-w-3xl w-full"
             modalToggler={toggleEditModal}
             modalHeaderTitle={`ویرایش ${project.title}`}
           >
-            edit
+            <AddProjectForm
+              id={project._id}
+              modalStateSetterFn={setIsEditModalOpen}
+              defaultValues={{
+                budget: project.budget,
+                category: project.category,
+                deadline: project.deadline,
+                description: project.description,
+                tags: project.tags,
+                title: project.title,
+              }}
+            />
           </Modal>
         </div>
       </td>

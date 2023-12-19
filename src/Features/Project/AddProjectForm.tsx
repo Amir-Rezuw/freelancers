@@ -16,33 +16,46 @@ import Loading from "../Shared/UI/Loading";
 import Select from "../Shared/UI/Select";
 import Textarea from "../Shared/UI/Textarea";
 import useAddProject from "./Hooks/useAddProject";
+import useEditProject from "./Hooks/useEditProject";
 import useGetCategoryList from "./Hooks/useGetCategoryList";
 
 const AddProjectForm = ({
   modalStateSetterFn,
+  defaultValues,
+  id,
 }: {
   modalStateSetterFn: Dispatch<SetStateAction<boolean>>;
+  defaultValues?: IAddProjectRequiredData;
+  id?: string;
 }) => {
   const {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<IAddProjectRequiredData>();
   const { data } = useGetCategoryList();
-  const { mutateAsync, isPending, isSuccess } = useAddProject();
+  const { addProject, isAdded, isAdding } = useAddProject();
+  const { editProject, isEdited, isEditing } = useEditProject();
   const onSubmit = (data: IAddProjectRequiredData) => {
     const serverData = {
       ...data,
       budget: +(data.budget as string).split(",").join(""),
     };
-    mutateAsync(serverData);
+    if (defaultValues && id) {
+      editProject({ data: serverData, id });
+    } else {
+      addProject(serverData);
+    }
   };
   useEffect(() => {
-    if (isSuccess) {
+    if (isAdded || isEdited) {
       modalStateSetterFn(false);
+      reset();
     }
-  }, [isSuccess]);
+  }, [isAdded, isEdited]);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -51,6 +64,7 @@ const AddProjectForm = ({
       <div className="flex flex-col gap-y-3">
         <div className="grid grid-cols-2 gap-x-4 gap-y-2">
           <LabeledInput
+            value={defaultValues?.title}
             className="w-full"
             dir="rtl"
             name="title"
@@ -63,6 +77,7 @@ const AddProjectForm = ({
             }}
           />
           <LabeledInput
+            value={defaultValues?.budget.toString()}
             dir="ltr"
             className="w-full"
             label="بودجه به تومان"
@@ -71,7 +86,6 @@ const AddProjectForm = ({
             type="text"
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               const formattedValue = textService.addCommas(e.target.value);
-
               e.target.value = formattedValue;
             }}
             error={errors.budget?.message}
@@ -84,7 +98,12 @@ const AddProjectForm = ({
             label="دسته بندی"
             name="category"
             register={register}
-            validation={{ required: MessagesText.RequiredFieldError }}
+            defaultValue={defaultValues?.category._id}
+            validation={{
+              required: MessagesText.RequiredFieldError,
+              value: defaultValues?.category._id,
+            }}
+            error={errors.category?.message}
           >
             {data?.data.categories.map((item) => (
               <Fragment key={item._id}>
@@ -98,6 +117,7 @@ const AddProjectForm = ({
             <Controller
               control={control}
               name="tags"
+              defaultValue={defaultValues?.tags}
               render={({ field: { onChange, value } }) => {
                 return (
                   <TagsInput
@@ -112,11 +132,17 @@ const AddProjectForm = ({
             <Controller
               control={control}
               name="deadline"
-              render={({ field: { onChange, value } }) => (
+              defaultValue={defaultValues?.deadline}
+              rules={{ required: MessagesText.RequiredFieldError }}
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
                 <DatePicker
                   date={value}
                   label="مهلت"
                   onChange={onChange}
+                  error={error?.message}
                 />
               )}
             />
@@ -127,7 +153,7 @@ const AddProjectForm = ({
               label="توضیحات"
               name="description"
               register={register}
-              type="text"
+              defaultValue={defaultValues?.description}
               error={errors.description?.message}
               validation={{
                 required: "پس توضیحات؟ 🗿",
@@ -138,9 +164,15 @@ const AddProjectForm = ({
       </div>
       <button
         className="btn btn-primary"
-        disabled={isPending}
+        disabled={isAdding || isEditing}
       >
-        {isPending ? <Loading /> : "افزودن"}
+        {isAdding || isEditing ? (
+          <Loading />
+        ) : defaultValues ? (
+          "ویرایش"
+        ) : (
+          "افزودن"
+        )}
       </button>
     </form>
   );

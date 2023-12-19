@@ -22,7 +22,7 @@ export interface IProposal {
 export interface IOwnerProjects {
   title: string;
   description: string;
-  status: "OPEN" | "CLOSE";
+  status: Statuses;
   category: ICategory;
   budget: number;
   tags: string[];
@@ -36,7 +36,7 @@ export interface IAddProjectRequiredData {
   title: string;
   description: string;
   tags: string[];
-  category: string;
+  category: ICategory;
   deadline: string;
   budget: number | string;
 }

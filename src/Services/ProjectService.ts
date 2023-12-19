@@ -1,4 +1,5 @@
 import API from "../Constants/API";
+import { Statuses } from "../Constants/Enums/Shared";
 import {
   IAddProjectRequiredData,
   IOwnerProjects,
@@ -20,4 +21,24 @@ export const addOwnerProject = async (
   data: IAddProjectRequiredData
 ): Promise<Success<{ message: string }>> => {
   return (await http.post(API.projects.addOwnerProject, data)).data;
+};
+export const editOwnerProject = async ({
+  data,
+  id,
+}: {
+  id: string;
+  data: IAddProjectRequiredData;
+}): Promise<Success<{ message: string }>> => {
+  return (await http.patch(`${API.projects.editOwnerProject}/${id}`, data))
+    .data;
+};
+export const toggleProjectStatus = async ({
+  data,
+  id,
+}: {
+  id: string;
+  data: { status: Statuses };
+}): Promise<Success<{ message: string }>> => {
+  return (await http.patch(`${API.projects.toggleOwnerProject}/${id}`, data))
+    .data;
 };

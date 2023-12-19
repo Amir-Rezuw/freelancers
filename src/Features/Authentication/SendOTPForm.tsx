@@ -15,7 +15,6 @@ const SendOTPForm = () => {
   } = useForm<IFormData>();
   const { isPending, otpSender } = useOtpSender();
   const { phoneNumber } = useAuthCtx();
-  console.log(errors);
 
   return (
     <form

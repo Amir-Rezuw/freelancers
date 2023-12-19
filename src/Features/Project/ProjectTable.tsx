@@ -22,12 +22,12 @@ const ProjectsTable = () => {
           <th>عملیات</th>
         </Table.Header>
 
-        <Table.Body>
+        <Table.Body className="bg-primary-gray-0 shadow-2xl px-2">
           {projects?.data.projects.map((project, index) => {
             return (
               <Table.Row
                 key={project._id}
-                className="bg-primary-gray-0 "
+                className="border-b border-b-primary-gray-100 last:border-none"
               >
                 <ProjectRow
                   index={index}

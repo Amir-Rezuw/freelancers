@@ -3,19 +3,15 @@ import { useMemo } from "react";
 import { toast } from "react-toast";
 import API from "../../../Constants/API";
 import { environment } from "../../../Environment/env";
-import { addOwnerProject } from "../../../Services/ProjectService";
+import { toggleProjectStatus } from "../../../Services/ProjectService";
 import useErrorType from "../../Shared/Hooks/useErrorType";
 
-const useAddProject = () => {
+const useToggleProjectStatus = () => {
   const queryClient = useQueryClient();
-  const mutationKey = useMemo(
-    () => [`${environment.baseUrl}${API.projects.addOwnerProject}`],
-    []
-  );
-
-  const { isPending, isSuccess, mutateAsync } = useMutation({
+  const mutationKey = useMemo(() => [`${API.projects.toggleOwnerProject}`], []);
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: toggleProjectStatus,
     mutationKey,
-    mutationFn: addOwnerProject,
     onSuccess: (data) => {
       toast.success(data.data.message);
       queryClient.invalidateQueries({
@@ -27,10 +23,9 @@ const useAddProject = () => {
     },
   });
   return {
-    isAdding: isPending,
-    isAdded: isSuccess,
-    addProject: mutateAsync,
+    toggleStatus: mutateAsync,
+    isToggling: isPending,
   };
 };
 
-export default useAddProject;
+export default useToggleProjectStatus;

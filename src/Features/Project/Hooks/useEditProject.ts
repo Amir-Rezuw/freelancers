@@ -3,21 +3,17 @@ import { useMemo } from "react";
 import { toast } from "react-toast";
 import API from "../../../Constants/API";
 import { environment } from "../../../Environment/env";
-import { addOwnerProject } from "../../../Services/ProjectService";
+import { editOwnerProject } from "../../../Services/ProjectService";
 import useErrorType from "../../Shared/Hooks/useErrorType";
 
-const useAddProject = () => {
+const useEditProject = () => {
   const queryClient = useQueryClient();
-  const mutationKey = useMemo(
-    () => [`${environment.baseUrl}${API.projects.addOwnerProject}`],
-    []
-  );
-
+  const mutationKey = useMemo(() => [`${API.projects.editOwnerProject}`], []);
   const { isPending, isSuccess, mutateAsync } = useMutation({
     mutationKey,
-    mutationFn: addOwnerProject,
-    onSuccess: (data) => {
-      toast.success(data.data.message);
+    mutationFn: editOwnerProject,
+    onSuccess: ({ data: { message } }) => {
+      toast.success(message);
       queryClient.invalidateQueries({
         queryKey: [`${environment.baseUrl}${API.projects.getOwnerProjects}`],
       });
@@ -26,11 +22,12 @@ const useAddProject = () => {
       toast.error(useErrorType(error));
     },
   });
+
   return {
-    isAdding: isPending,
-    isAdded: isSuccess,
-    addProject: mutateAsync,
+    isEditing: isPending,
+    isEdited: isSuccess,
+    editProject: mutateAsync,
   };
 };
 
-export default useAddProject;
+export default useEditProject;
