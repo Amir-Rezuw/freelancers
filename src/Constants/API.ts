@@ -9,7 +9,7 @@ const API = {
     getOwnerProjects: "project/owner-projects",
     addOwnerProject: "project/add",
     editOwnerProject: "project/update",
-    toggleOwnerProject: "project",
+    singleProject: "project",
   },
   category: {
     getAll: "category/list",

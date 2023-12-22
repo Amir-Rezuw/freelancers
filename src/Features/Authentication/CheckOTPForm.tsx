@@ -1,4 +1,4 @@
-import { Fragment, useRef } from "react";
+import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { HiArrowRight } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
@@ -13,30 +13,30 @@ import OTPInputs from "../Shared/UI/OTPInputs";
 import { useAuthCtx } from "./Context/Auth.ctx";
 import useCheckOtp from "./Hooks/useCheckOtp";
 import useOtpSender from "./Hooks/useOtpSender";
-interface IFormData {}
+interface IFormData {
+  code: string;
+}
 const CheckOTPForm = () => {
   const { otpSender } = useOtpSender();
   const { phoneNumber } = useAuthCtx();
-  const finalCode = useRef(0);
   const navigate = useNavigate();
   const { mutateAsync, isPending } = useCheckOtp();
-  const { handleSubmit } = useForm<IFormData>();
+  const { handleSubmit, control, setValue } = useForm<IFormData>();
   const { reset: resetTimer, timer: resendTimer } = useInterval({
     delay: 1000,
     duration: environment.OtpResendTimer,
     step: 1,
   });
-  const onCheckCode = async () => {
-    if (finalCode.current.toString().length !== environment.OtpLength) {
+  const onCheckCode = async ({ code }: IFormData) => {
+    if (code.toString().length !== environment.OtpLength) {
       toast.error("کد وارد شده اشتباه میباشد");
       return;
     }
     try {
       const { data } = await mutateAsync({
         phoneNumber: phoneNumber ?? "",
-        otp: `${finalCode.current}`,
+        otp: `${code}`,
       });
-
       if (!data.user.isActive) {
         toast.success(data.message ?? MessagesText.Welcome);
         navigate(`/complete-profile`);
@@ -55,13 +55,11 @@ const CheckOTPForm = () => {
         navigate("/owner");
         return;
       }
-
       if (data.user.role === UserTypes.freelancer) {
         toast.success(MessagesText.Welcome);
         navigate("/freelancer");
         return;
       }
-      // useCheckResult(data);
     } catch (error) {
       toast.error(useErrorType(error));
     }
@@ -86,13 +84,17 @@ const CheckOTPForm = () => {
             <span> {phoneNumber} </span>
             را وارد کنید
           </p>
-          <div className="flex flex-row-reverse mt-2">
+          <div className="flex flex-row-reverse mt-2 items-center">
             <OTPInputs
+              useFormSetValue={setValue}
+              useFormControl={control}
+              name="code"
               disabled={isPending}
               fieldLength={6}
-              finalCodeRef={finalCode}
               inputClassNames="text-input w-14 mx-1 text-center"
-            />
+            >
+              <span>-</span>
+            </OTPInputs>
           </div>
         </div>
         <div>

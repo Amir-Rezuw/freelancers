@@ -3,6 +3,7 @@ import { Statuses } from "../Constants/Enums/Shared";
 import {
   IAddProjectRequiredData,
   IOwnerProjects,
+  ISingleProjectData,
 } from "../Types/Server/Projects";
 import { Success } from "../Types/Shared/IApiResponse";
 import http from "./HttpServices";
@@ -39,6 +40,10 @@ export const toggleProjectStatus = async ({
   id: string;
   data: { status: Statuses };
 }): Promise<Success<{ message: string }>> => {
-  return (await http.patch(`${API.projects.toggleOwnerProject}/${id}`, data))
-    .data;
+  return (await http.patch(`${API.projects.singleProject}/${id}`, data)).data;
+};
+export const getSingleProject = async (
+  id: string | undefined
+): Promise<void | Success<{ project: ISingleProjectData }>> => {
+  if (id) return (await http.get(`${API.projects.singleProject}/${id}`)).data;
 };

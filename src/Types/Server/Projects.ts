@@ -40,3 +40,27 @@ export interface IAddProjectRequiredData {
   deadline: string;
   budget: number | string;
 }
+export interface ISingleProjectData {
+  _id: string;
+  title: string;
+  description: string;
+  status: Statuses;
+  category: {
+    _id: string;
+    title: string;
+    englishTitle: string;
+  };
+  budget: number;
+  tags: string[];
+  proposals: IProposal[];
+  deadline: string;
+  owner: {
+    _id: string;
+    name: string;
+    avatarUrl: string | null;
+  };
+  freelancer: null;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}

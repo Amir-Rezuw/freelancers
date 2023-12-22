@@ -8,7 +8,7 @@ import useErrorType from "../../Shared/Hooks/useErrorType";
 
 const useToggleProjectStatus = () => {
   const queryClient = useQueryClient();
-  const mutationKey = useMemo(() => [`${API.projects.toggleOwnerProject}`], []);
+  const mutationKey = useMemo(() => [`${API.projects.singleProject}`], []);
   const { mutateAsync, isPending } = useMutation({
     mutationFn: toggleProjectStatus,
     mutationKey,

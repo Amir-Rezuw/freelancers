@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  Fragment,
-  SetStateAction,
-  useEffect,
-} from "react";
+import { ChangeEvent, Fragment, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { TagsInput } from "react-tag-input-component";
 import { MessagesText } from "../../Constants/Messages";
@@ -20,11 +14,11 @@ import useEditProject from "./Hooks/useEditProject";
 import useGetCategoryList from "./Hooks/useGetCategoryList";
 
 const AddProjectForm = ({
-  modalStateSetterFn,
+  toggleModal,
   defaultValues,
   id,
 }: {
-  modalStateSetterFn: Dispatch<SetStateAction<boolean>>;
+  toggleModal: (preferredValue?: boolean) => void;
   defaultValues?: IAddProjectRequiredData;
   id?: string;
 }) => {
@@ -51,7 +45,7 @@ const AddProjectForm = ({
   };
   useEffect(() => {
     if (isAdded || isEdited) {
-      modalStateSetterFn(false);
+      toggleModal(false);
       reset();
     }
   }, [isAdded, isEdited]);
