@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import ProjectsTable from "../../Features/Project/ProjectTable";
-import ProjectsHeader from "../../Features/Project/ProjectsHeader";
+import ProjectsTable from "../../Features/Projects/ProjectTable";
+import ProjectsHeader from "../../Features/Projects/ProjectsHeader";
 const Projects = () => {
   return (
     <Fragment>

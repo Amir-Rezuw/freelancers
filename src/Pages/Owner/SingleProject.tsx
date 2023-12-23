@@ -1,9 +1,26 @@
-import useGetSingleProject from "../../Features/Project/Hooks/useGetSingleProject";
+import useGetSingleProject from "../../Features/Projects/Hooks/useGetSingleProject";
+import Loading from "../../Features/Shared/UI/Loading";
+import SingleProjectHeader from "../../Features/SingleProject/Header";
+import ProposalsTable from "../../Features/SingleProject/ProposalsTable";
 
 const SingleProject = () => {
-  const { project } = useGetSingleProject();
+  const { data, isPending, isError } = useGetSingleProject();
 
-  return <div>single project</div>;
+  if (isPending || isError) {
+    return (
+      <Loading
+        color="rgb(var(--primary-blue-700))"
+        height={80}
+        width={80}
+      />
+    );
+  }
+  return (
+    <div>
+      <SingleProjectHeader project={data?.data.project} />
+      <ProposalsTable proposalList={data?.data.project.proposals} />
+    </div>
+  );
 };
 
 export default SingleProject;

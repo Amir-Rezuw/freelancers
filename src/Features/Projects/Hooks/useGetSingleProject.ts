@@ -12,15 +12,10 @@ const useGetSingleProject = () => {
     []
   );
 
-  const { data, isPending } = useQuery({
+  return useQuery({
     queryKey,
     queryFn: () => getSingleProject(projectId),
   });
-
-  return {
-    project: data,
-    isProjectLoading: isPending,
-  };
 };
 
 export default useGetSingleProject;
