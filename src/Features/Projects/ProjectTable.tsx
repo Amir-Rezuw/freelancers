@@ -9,7 +9,7 @@ const ProjectsTable = () => {
   if (isLoading) return <Loading />;
   return (
     <Fragment>
-      <Table>
+      <Table className="rounded-2xl ">
         <Table.Header>
           <th>#</th>
           <th>عنوان پروژه</th>
@@ -23,12 +23,12 @@ const ProjectsTable = () => {
           <th>درخواست ها</th>
         </Table.Header>
 
-        <Table.Body className="bg-primary-gray-0 shadow-2xl px-2">
+        <Table.Body className="bg-primary-gray-0 ">
           {projects?.data.projects.map((project, index) => {
             return (
               <Table.Row
+                // className="border-b border-b-primary-gray-100 last:border-none"
                 key={project._id}
-                className="border-b border-b-primary-gray-100 last:border-none"
               >
                 <ProjectRow
                   index={index}

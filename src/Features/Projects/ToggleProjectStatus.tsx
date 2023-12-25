@@ -1,5 +1,6 @@
 import { Statuses } from "../../Constants/Enums/Shared";
 import { IOwnerProjects } from "../../Types/Server/Projects";
+import { textService } from "../../Utils/TextAndNumber";
 import Toggle from "../Shared/UI/Toggle";
 import useToggleProjectStatus from "./Hooks/useToggleProjectStatus";
 
@@ -18,7 +19,7 @@ const ToggleProjectStatus = ({ project }: IProps) => {
     <div className="w-[5rem]">
       <Toggle
         isActive={project.status === Statuses.OPEN}
-        label={project.status === Statuses.OPEN ? "باز" : "بسته"}
+        label={textService.getStatusText(project.status)}
         onChange={onToggleStatus}
         disabled={isToggling}
       />

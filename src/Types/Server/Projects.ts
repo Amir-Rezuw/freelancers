@@ -13,9 +13,10 @@ export interface ICategory {
 }
 export interface IProposal {
   price: number;
+  _id: string;
   duration: number;
   description: string;
-  user: IUser;
+  user: IUser | null;
   status: Statuses;
 }
 

@@ -14,7 +14,7 @@ interface IProps<T extends FieldValues> {
   children: ReactNode;
   validation: RegisterOptions;
   required?: boolean;
-  defaultValue?: string;
+  defaultValue?: string | number;
   error?: string;
 }
 
@@ -57,7 +57,7 @@ const Option = ({
   children,
   className,
 }: {
-  value: string;
+  value: string | number;
   className?: string;
   children: ReactNode;
 }) => {

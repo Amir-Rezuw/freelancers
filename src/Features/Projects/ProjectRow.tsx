@@ -24,7 +24,7 @@ const ProjectRow = ({ index, project }: IProps) => {
   const { isPending, mutate: deleteProject } = useDeleteProject();
   return (
     <Fragment>
-      <td>{index + 1}</td>
+      <td className={`${index === 0 && "rounded-tr-2xl"}`}>{index + 1}</td>
       <td>{textService.truncateText(project.title, 30)}</td>
       <td>{project.category.title}</td>
       <td>{textService.addCommas(project.budget.toString())}</td>
@@ -56,7 +56,7 @@ const ProjectRow = ({ index, project }: IProps) => {
           toggleEditModal={toggleEditModal}
         />
       </td>
-      <td>
+      <td className={`${index === 0 && "rounded-tl-2xl"}`}>
         <Link
           to={project._id}
           className="flex justify-center"
