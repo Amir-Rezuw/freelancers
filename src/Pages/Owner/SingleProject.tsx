@@ -1,6 +1,6 @@
-import useGetSingleProject from "../../Features/Projects/Hooks/useGetSingleProject";
 import Loading from "../../Features/Shared/UI/Loading";
 import SingleProjectHeader from "../../Features/SingleProject/Header";
+import useGetSingleProject from "../../Features/SingleProject/Hooks/useGetSingleProject";
 import ProposalsTable from "../../Features/SingleProject/ProposalsTable";
 
 const SingleProject = () => {

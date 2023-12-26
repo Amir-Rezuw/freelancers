@@ -2,7 +2,10 @@ import { useForm } from "react-hook-form";
 import { Statuses } from "../../Constants/Enums/Shared";
 import { MessagesText } from "../../Constants/Messages";
 import { textService } from "../../Utils/TextAndNumber";
+import IsVisible from "../Shared/UI/IsVisible";
+import Loading from "../Shared/UI/Loading";
 import Select from "../Shared/UI/Select";
+import useChangeProposalStatus from "./Hooks/useChangeProposalStatus";
 interface IProps {
   id: string;
   closerFn: (value?: boolean) => void;
@@ -22,13 +25,16 @@ const selectOptions = [
     value: Statuses.REJECTED,
   },
 ];
-const ProposalStatusModalContent = ({ status }: IProps) => {
+const ProposalStatusModalContent = ({ status, id, closerFn }: IProps) => {
   const { register, handleSubmit } = useForm<{ status: Statuses }>();
+  const { changeStatus, isChanging } = useChangeProposalStatus();
+
   return (
     <div>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          changeStatus({ id, data: data.status });
+          closerFn(false);
         })}
       >
         <Select
@@ -56,7 +62,10 @@ const ProposalStatusModalContent = ({ status }: IProps) => {
           type="submit"
           className="btn btn-primary w-full mt-5"
         >
-          تایید
+          <IsVisible isVisible={isChanging}>
+            <Loading />
+          </IsVisible>
+          <IsVisible isVisible={!isChanging}>تایید</IsVisible>
         </button>
       </form>
     </div>

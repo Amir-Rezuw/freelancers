@@ -14,5 +14,8 @@ const API = {
   category: {
     getAll: "category/list",
   },
+  proposal: {
+    proposal: "proposal",
+  },
 };
 export default API;

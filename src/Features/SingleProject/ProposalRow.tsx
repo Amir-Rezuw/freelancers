@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { HiPencil } from "react-icons/hi";
 import { IProposal } from "../../Types/Server/Projects";
 import { textService } from "../../Utils/TextAndNumber";
 import useToggleState from "../Shared/Hooks/useToggleState";
@@ -11,7 +12,7 @@ interface IProps {
 }
 
 const ProposalRow = ({ proposal, index }: IProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
       <td className={`${index === 0 && "rounded-tr-2xl"}`}>{index + 1}</td>
@@ -43,7 +44,7 @@ const ProposalRow = ({ proposal, index }: IProps) => {
           />
         </Modal>
         <button onClick={() => useToggleState(setIsModalOpen, true)}>
-          تغییر وضعیت
+          <HiPencil className="w-5 h-5 text-warning" />
         </button>
       </td>
     </>

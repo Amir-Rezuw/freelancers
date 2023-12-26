@@ -1,6 +1,8 @@
 import { Statuses } from "../../Constants/Enums/Shared";
 import { IOwnerProjects } from "../../Types/Server/Projects";
 import { textService } from "../../Utils/TextAndNumber";
+import IsVisible from "../Shared/UI/IsVisible";
+import Loading from "../Shared/UI/Loading";
 import Toggle from "../Shared/UI/Toggle";
 import useToggleProjectStatus from "./Hooks/useToggleProjectStatus";
 
@@ -17,12 +19,17 @@ const ToggleProjectStatus = ({ project }: IProps) => {
   };
   return (
     <div className="w-[5rem]">
-      <Toggle
-        isActive={project.status === Statuses.OPEN}
-        label={textService.getStatusText(project.status)}
-        onChange={onToggleStatus}
-        disabled={isToggling}
-      />
+      <IsVisible isVisible={isToggling}>
+        <Loading color="rgb(var(--primary-blue-900))" />
+      </IsVisible>
+      <IsVisible isVisible={!isToggling}>
+        <Toggle
+          isActive={project.status === Statuses.OPEN}
+          label={textService.getStatusText(project.status)}
+          onChange={onToggleStatus}
+          disabled={isToggling}
+        />
+      </IsVisible>
     </div>
   );
 };
