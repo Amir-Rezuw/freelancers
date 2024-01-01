@@ -1,5 +1,11 @@
+import Dashboard from "../../Features/Owner/Dashboard/Layout";
+
 const OwnerDashboard = () => {
-  return <div>OwnerDashboard</div>;
+  return (
+    <div>
+      <Dashboard />
+    </div>
+  );
 };
 
 export default OwnerDashboard;

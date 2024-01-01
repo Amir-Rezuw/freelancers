@@ -1,12 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toast";
-
 import "./App.css";
-
 import { environment } from "./Environment/env";
 import AuthLayout from "./Features/Authentication/Layout/Auth.leyout";
-import AppLayout from "./Features/Shared/UI/Layouts/AppLayout";
+import OwnerLayout from "./Features/Owner/OwnerLayout";
 import CheckOtp from "./Pages/Auth/CheckOtp";
 import SendOtp from "./Pages/Auth/SendOtp";
 import CompleteProfile from "./Pages/CompleteProfile";
@@ -25,60 +23,21 @@ function App() {
       />
 
       <Routes>
-        <Route
-          path="/"
-          element={<Home />}
-        />
-        <Route
-          path="/auth"
-          element={<AuthLayout />}
-        >
-          <Route
-            index
-            element={<SendOtp />}
-          />
-          <Route
-            path="check-otp"
-            element={<CheckOtp />}
-          />
+        <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route index element={<SendOtp />} />
+          <Route path="check-otp" element={<CheckOtp />} />
         </Route>
-        <Route
-          path="/complete-profile"
-          element={<CompleteProfile />}
-        />
-
-        <Route
-          path="/owner"
-          element={<AppLayout />}
-        >
-          <Route
-            index
-            element={
-              <Navigate
-                to={"dashboard"}
-                replace
-              />
-            }
-          />
-          <Route
-            path="dashboard"
-            element={<Owner />}
-          />
-          <Route
-            path="projects"
-            element={<Projects />}
-          />
-          <Route
-            path="projects/:projectId"
-            element={<SingleProject />}
-          />
+        <Route path="/complete-profile" element={<CompleteProfile />} />
+        <Route path="/owner" element={<OwnerLayout />}>
+          <Route index element={<Navigate to={"dashboard"} replace />} />
+          <Route path="dashboard" element={<Owner />} />
+          <Route path="projects" element={<Projects />} />
+          <Route path="projects/:projectId" element={<SingleProject />} />
         </Route>
-        <Route
-          path="*"
-          element={<NotFound />}
-        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-    </QueryClientProvider>
+    </QueryClientProvider> 
   );
 }
 
