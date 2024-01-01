@@ -12,6 +12,7 @@ const useGetOwnerProjects = () => {
   return useQuery({
     queryKey,
     queryFn: getOwnerProjects,
+    retry: false,
   });
 };
 

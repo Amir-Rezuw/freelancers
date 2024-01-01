@@ -97,7 +97,7 @@ const CheckOTPForm = () => {
             </OTPInputs>
           </div>
         </div>
-        <div>
+        <div className="text-primary-gray-900">
           {resendTimer > 0 ? (
             `${resendTimer} تا ارسال مجدد کد`
           ) : (

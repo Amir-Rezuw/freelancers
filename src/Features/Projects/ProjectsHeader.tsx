@@ -12,7 +12,7 @@ const ProjectsHeader = () => {
   return (
     <Fragment>
       <div className="flex justify-between items-center">
-        <h1>پروژه های شما</h1>
+        <h1 className="text-primary-gray-900">پروژه های شما</h1>
         <button
           className="btn btn-primary flex items-center gap-x-1"
           onClick={() => toggleAddProjectModal()}
@@ -29,7 +29,7 @@ const ProjectsHeader = () => {
         modalToggler={toggleAddProjectModal}
         modalHeaderTitle="افزودن پروژه‌ی جدید"
       >
-        <AddProjectForm modalStateSetterFn={setIsAddProjectModalOpen} />
+        <AddProjectForm toggleModal={toggleAddProjectModal} />
       </Modal>
     </Fragment>
   );

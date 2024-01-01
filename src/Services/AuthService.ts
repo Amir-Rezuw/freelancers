@@ -29,3 +29,6 @@ export const completeProfile = async (
 export const GetUserProfile = async (): Promise<Success<IUserProfile>> => {
   return (await http.get(`${API.user.userProfile}`)).data;
 };
+export const Logout = async () => {
+  return (await http.post(`${API.user.logout}`)).data;
+};

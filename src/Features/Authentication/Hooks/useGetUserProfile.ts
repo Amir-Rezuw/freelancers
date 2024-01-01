@@ -6,14 +6,20 @@ import { GetUserProfile } from "../../../Services/AuthService";
 
 const useGetUserProfile = () => {
   const queryKey = useMemo(
-    () => [`${environment.baseUrl}${API.userProfile}`],
+    () => [`${environment.baseUrl}${API.user.userProfile}`],
     []
   );
-  return useQuery({
+
+  const { data, isPending, error } = useQuery({
     queryKey,
     queryFn: GetUserProfile,
     retry: false,
   });
+  return {
+    user: data?.data.user,
+    isLoading: isPending,
+    error,
+  };
 };
 
 export default useGetUserProfile;

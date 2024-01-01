@@ -4,6 +4,7 @@ const API = {
     checkOtp: "user/check-otp",
     completeProfile: "user/complete-profile",
     userProfile: "user/profile",
+    logout: "user/logout",
   },
   projects: {
     getOwnerProjects: "project/owner-projects",

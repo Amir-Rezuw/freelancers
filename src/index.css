@@ -22,46 +22,65 @@
 .rti--container:focus {
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
 }
+.rti--container {
+  background-color: rgb(var(--primary-gray-50)) !important;
+}
 .rti--container .rti--input {
   background-color: rgb(var(--primary-gray-200));
   border-radius: 6px;
-  color: rgb(var(--color-primary-gray-800));
+  color: rgb(var(--primary-gray-800));
   padding: 0.3rem 1rem;
 }
 
 .rti--tag {
-  background-color: rgb(var(--color-primary-gray-500));
-  color: rgb(var(--color-primary-gray-100));
+  background-color: rgb(var(--primary-gray-500));
 }
 @layer base {
   :root {
-    --background-app-rgb: 244, 245, 247;
-    --primary-blue-900: 74, 109, 255;
-    --primary-blue-800: 92, 124, 255;
-    --primary-blue-700: 110, 138, 255;
-    --primary-blue-600: 128, 153, 255;
-    --primary-blue-500: 146, 167, 255;
-    --primary-blue-400: 164, 182, 255;
-    --primary-blue-300: 183, 197, 255;
-    --primary-blue-200: 201, 211, 255;
-    --primary-blue-100: 219, 226, 255;
-    --primary-blue-50: 228, 233, 255;
-    --primary-gray-900: 17, 24, 39;
-    --primary-gray-800: 31, 41, 55;
-    --primary-gray-700: 55, 65, 81;
-    --primary-gray-600: 75, 85, 99;
-    --primary-gray-500: 107, 114, 128;
-    --primary-gray-400: 156, 163, 175;
-    --primary-gray-300: 209, 213, 219;
-    --primary-gray-200: 229, 231, 235;
-    --primary-gray-100: 243, 244, 246;
-    --primary-gray-50: 249, 250, 251;
-    --primary-gray-0: 255, 255, 255;
-    --success: 0, 192, 115;
-    --warning: 255, 153, 0;
-    --error: 255, 71, 87;
-    --red-500: 239, 68, 68;
-    --red-300: 252, 165, 165;
+    &,
+    &.light-mode {
+      --background-app-rgb: 244, 245, 247;
+      --primary-blue-900: 74, 109, 255;
+      --primary-blue-800: 92, 124, 255;
+      --primary-blue-700: 110, 138, 255;
+      --primary-blue-600: 128, 153, 255;
+      --primary-blue-500: 146, 167, 255;
+      --primary-blue-400: 164, 182, 255;
+      --primary-blue-300: 183, 197, 255;
+      --primary-blue-200: 201, 211, 255;
+      --primary-blue-100: 219, 226, 255;
+      --primary-blue-50: 228, 233, 255;
+      --primary-gray-900: 17, 24, 39;
+      --primary-gray-800: 31, 41, 55;
+      --primary-gray-700: 55, 65, 81;
+      --primary-gray-600: 75, 85, 99;
+      --primary-gray-500: 107, 114, 128;
+      --primary-gray-400: 156, 163, 175;
+      --primary-gray-300: 209, 213, 219;
+      --primary-gray-200: 229, 231, 235;
+      --primary-gray-100: 243, 244, 246;
+      --primary-gray-50: 249, 250, 251;
+      --primary-gray-0: 255, 255, 255;
+      --success: 0, 192, 115;
+      --warning: 255, 153, 0;
+      --error: 255, 71, 87;
+      --red-500: 239, 68, 68;
+      --red-300: 252, 165, 165;
+    }
+    &.dark-mode {
+      --primary-gray-900: 249, 250, 251;
+      --primary-gray-800: 243, 244, 246;
+      --primary-gray-700: 229, 231, 235;
+      --primary-gray-600: 209, 213, 219;
+      --primary-gray-500: 156, 163, 175;
+      --primary-gray-400: 107, 114, 128;
+      --primary-gray-300: 75, 85, 99;
+      --primary-gray-200: 55, 65, 81;
+      --primary-gray-100: 31, 41, 55;
+      --primary-gray-50: 17, 24, 39;
+      --primary-gray-0: 24, 33, 47;
+      --backdrop-color: 0, 0, 0;
+    }
   }
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
@@ -119,25 +138,32 @@ table {
 }
 
 table .title-row {
-  background-color: rgb(var(--color-primary-gray-100));
+  background-color: rgb(var(--primary-gray-100));
 }
 
 table td,
 table th {
-  border-bottom: 1px solid rgb(var(--color-primary-gray-200));
+  border-bottom: 1px solid rgb(var(--primary-gray-200));
   text-align: right;
   white-space: nowrap;
 }
 
 table th {
   padding: 0.6rem 1rem;
-  color: rgb(var(--color-primary-gray-600));
+  color: rgb(var(--primary-gray-600));
   font-size: 0.9rem;
 }
-table {
-}
+
 table td {
   font-size: 0.85rem;
   padding: 1rem 1rem;
-  color: rgb(var(--color-primary-gray-600));
+  color: rgb(var(--primary-gray-600));
+}
+input,
+textarea,
+select {
+  background-color: rgb(var(--primary-gray-50));
+}
+label {
+  color: rgb(var(--primary-gray-900));
 }

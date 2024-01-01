@@ -37,7 +37,7 @@ const LabeledInput = <T extends FieldValues>({
   return (
     <div className={`flex flex-col gap-y-2 ${className}`}>
       <label
-        className="block"
+        className="block text-primary-gray-900"
         htmlFor={name}
       >
         {label} {required && <span className="text-error">*</span>}

@@ -3,7 +3,9 @@ import { OwnerPanelSideBar } from "../../../Constants/Navlinks";
 
 const Sidebar = ({ classNames }: { classNames?: string }) => {
   return (
-    <div className={`bg-white row-start-1 row-span-2 ${classNames}`}>
+    <div
+      className={`bg-primary-gray-0 border-l row-start-1 row-span-2 ${classNames}`}
+    >
       <ul className="flex flex-col gap-y-4 p-4">
         {OwnerPanelSideBar.map(({ Icon, link, title }) => {
           return (
