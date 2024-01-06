@@ -27,9 +27,6 @@ export const textService = {
         return "رد";
       case Statuses.VERIFIED:
         return "تایید";
-
-      default:
-        return "خطا.";
     }
   },
   getStatusBadge: (status: Statuses) => {
@@ -44,9 +41,6 @@ export const textService = {
         return "badge--danger";
       case Statuses.VERIFIED:
         return "badge--success";
-
-      default:
-        return "خطا.";
     }
   },
 };

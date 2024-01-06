@@ -55,6 +55,16 @@ const OTPInputs = <T extends FieldValues>({
     if (event.key === "Backspace") {
       if (activeOtpInput > 0) {
         setActiveOtpInput((pervious) => --pervious);
+        setOtp((perviousValue) => {
+          const result = perviousValue.map((item, index) => {
+            if (index === activeOtpInput - 1) {
+              item = "";
+            }
+            return item;
+          });
+
+          return result;
+        });
       }
       return;
     }

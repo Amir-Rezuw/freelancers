@@ -12,6 +12,8 @@ interface IProps {
   index: number;
   project: IOwnerProjects;
 }
+const _CLASS_NAMES =
+  "p-4 text-right whitespace-nowrap text-sm text-primary-gray-600";
 const ProjectRow = ({ index, project }: IProps) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -24,12 +26,20 @@ const ProjectRow = ({ index, project }: IProps) => {
   const { isPending, mutate: deleteProject } = useDeleteProject();
   return (
     <Fragment>
-      <td className={`${index === 0 && "rounded-tr-2xl"}`}>{index + 1}</td>
-      <td>{textService.truncateText(project.title, 30)}</td>
-      <td>{project.category.title}</td>
-      <td>{textService.addCommas(project.budget.toString())}</td>
-      <td>{timeService.convertIsoToPersian(project.deadline)}</td>
-      <td>
+      <td className={`${_CLASS_NAMES} ${index === 0 && "rounded-tr-2xl"}`}>
+        {index + 1}
+      </td>
+      <td className={_CLASS_NAMES}>
+        {textService.truncateText(project.title, 30)}
+      </td>
+      <td className={_CLASS_NAMES}>{project.category.title}</td>
+      <td className={_CLASS_NAMES}>
+        {textService.addCommas(project.budget.toString())}
+      </td>
+      <td className={_CLASS_NAMES}>
+        {timeService.convertIsoToPersian(project.deadline)}
+      </td>
+      <td className={_CLASS_NAMES}>
         <div className="flex flex-wrap items-center gap-2 max-w-[200px]">
           {project.tags.map((tag) => (
             <span
@@ -41,11 +51,11 @@ const ProjectRow = ({ index, project }: IProps) => {
           ))}
         </div>
       </td>
-      <td>{project?.freelancer?.name || "-"}</td>
-      <td>
+      <td className={_CLASS_NAMES}>{project?.freelancer?.name || "-"}</td>
+      <td className={_CLASS_NAMES}>
         <ToggleProjectStatus project={project} />
       </td>
-      <td className="flex gap-x-3">
+      <td className={`${_CLASS_NAMES} flex gap-x-3`}>
         <EditAndDeleteProject
           isDeleteModalOpen={isDeleteModalOpen}
           isEditModalOpen={isEditModalOpen}
@@ -56,7 +66,7 @@ const ProjectRow = ({ index, project }: IProps) => {
           toggleEditModal={toggleEditModal}
         />
       </td>
-      <td className={`${index === 0 && "rounded-tl-2xl"}`}>
+      <td className={`${_CLASS_NAMES} ${index === 0 && "rounded-tl-2xl"}`}>
         <Link
           to={project._id}
           className="flex justify-center"

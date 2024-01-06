@@ -1,5 +1,7 @@
+import { Navigate } from "react-router-dom";
+
 const Home = () => {
-  return <div className="container xl:max-w-screen-xl"></div>;
+  return <Navigate to={"/auth"} />;
 };
 
 export default Home;

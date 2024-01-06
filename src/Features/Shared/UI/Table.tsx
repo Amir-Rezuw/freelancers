@@ -6,8 +6,8 @@ interface IProps {
 }
 const Table = ({ children, className }: IProps) => {
   return (
-    <div className={`overflow-x-auto ${className}`}>
-      <table>{children}</table>
+    <div className={"overflow-x-auto rounded-2xl"}>
+      <table className={`w-full ${className}`}>{children}</table>
     </div>
   );
 };
@@ -22,10 +22,10 @@ const TableHeader = ({ children, className }: IProps) => {
   );
 };
 const TableBody = ({ children, className }: IProps) => {
-  return <tbody className={className}>{children}</tbody>;
+  return <tbody className={`${className}`}>{children}</tbody>;
 };
 const TableRow = ({ children, className }: IProps) => {
-  return <tr className={className}>{children}</tr>;
+  return <tr className={`${className}`}>{children}</tr>;
 };
 
 Table.Header = TableHeader;

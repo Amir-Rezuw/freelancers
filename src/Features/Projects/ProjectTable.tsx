@@ -9,25 +9,47 @@ const ProjectsTable = () => {
   if (isLoading) return <Loading />;
   return (
     <Fragment>
-      <Table className="rounded-2xl ">
+      <Table>
         <Table.Header>
-          <th>#</th>
-          <th>عنوان پروژه</th>
-          <th>دسته بندی</th>
-          <th>بودجه</th>
-          <th>ددلاین</th>
-          <th>تگ ها</th>
-          <th>فریلنسر</th>
-          <th>وضعیت</th>
-          <th>عملیات</th>
-          <th>درخواست ها</th>
+          <th className="text-right whitespace-nowrap px-4 py-2 text-primary-gray-600 text-base">
+            #
+          </th>
+          <th className="text-right whitespace-nowrap px-4 py-2 text-primary-gray-600 text-base">
+            عنوان پروژه
+          </th>
+          <th className="text-right whitespace-nowrap px-4 py-2 text-primary-gray-600 text-base">
+            دسته بندی
+          </th>
+          <th className="text-right whitespace-nowrap px-4 py-2 text-primary-gray-600 text-base">
+            بودجه
+          </th>
+          <th className="text-right whitespace-nowrap px-4 py-2 text-primary-gray-600 text-base">
+            ددلاین
+          </th>
+          <th className="text-right whitespace-nowrap px-4 py-2 text-primary-gray-600 text-base">
+            تگ ها
+          </th>
+          <th className="text-right whitespace-nowrap px-4 py-2 text-primary-gray-600 text-base">
+            فریلنسر
+          </th>
+          <th className="text-right whitespace-nowrap px-4 py-2 text-primary-gray-600 text-base">
+            وضعیت
+          </th>
+          <th className="text-right whitespace-nowrap px-4 py-2 text-primary-gray-600 text-base">
+            عملیات
+          </th>
+          <th className="text-right whitespace-nowrap px-4 py-2 text-primary-gray-600 text-base">
+            درخواست ها
+          </th>
         </Table.Header>
 
-        <Table.Body className="bg-primary-gray-0 ">
+        <Table.Body className="bg-primary-gray-0">
           {projects?.data.projects.map((project, index) => {
             return (
               <Table.Row
-                // className="border-b border-b-primary-gray-100 last:border-none"
+                className={`border-b border-primary-gray-200 ${
+                  index === projects.data.projects.length - 1 && "border-none"
+                }`}
                 key={project._id}
               >
                 <ProjectRow

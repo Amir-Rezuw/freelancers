@@ -39,11 +39,12 @@ const CheckOTPForm = () => {
       });
       if (!data.user.isActive) {
         toast.success(data.message ?? MessagesText.Welcome);
-        navigate(`/complete-profile`);
+        navigate(`/auth/complete-profile`);
         return;
       }
       if (data.user.status === Statuses.PENDING) {
         toast.warn(MessagesText.PendingProfileError);
+        navigate("/freelancer");
         return;
       }
       if (data.user.status === Statuses.REJECTED) {
@@ -93,7 +94,7 @@ const CheckOTPForm = () => {
               fieldLength={6}
               inputClassNames="text-input w-14 mx-1 text-center"
             >
-              <span>-</span>
+              <span className="text-primary-gray-900">-</span>
             </OTPInputs>
           </div>
         </div>
@@ -115,7 +116,7 @@ const CheckOTPForm = () => {
           )}
         </div>
         <button
-          className="btn btn-primary w-full"
+          className="btn btn-primary w-full text-primary-gray-900"
           type="submit"
           disabled={isPending}
         >

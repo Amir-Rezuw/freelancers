@@ -4,9 +4,9 @@ import {
   HiOutlineCurrencyDollar,
   HiOutlineViewGrid,
 } from "react-icons/hi";
-import { Statuses } from "../../Constants/Enums/Shared";
-import { IOwnerProjects } from "../../Types/Server/Projects";
-import StatCart from "./StatCart";
+import { Statuses } from "../../../Constants/Enums/Shared";
+import { IOwnerProjects } from "../../../Types/Server/Projects";
+import StatCart from "../../Shared/UI/StatCart";
 
 interface IProps {
   projects: IOwnerProjects[];

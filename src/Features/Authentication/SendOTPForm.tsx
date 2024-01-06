@@ -42,7 +42,7 @@ const SendOTPForm = () => {
       </div>
       <button
         type="submit"
-        className="btn btn-primary w-full"
+        className="btn btn-primary w-full text-primary-gray-900"
         disabled={isPending}
       >
         {isPending ? <Loading /> : "ارسال کد تایید"}

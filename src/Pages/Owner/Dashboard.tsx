@@ -1,4 +1,4 @@
-import Dashboard from "../../Features/Owner/Dashboard/Layout";
+import Dashboard from "../../Features/Owner/Dashboard/Content";
 
 const OwnerDashboard = () => {
   return (

@@ -17,6 +17,7 @@ const API = {
   },
   proposal: {
     proposal: "proposal",
+    getList: "proposal/list",
   },
 };
 export default API;

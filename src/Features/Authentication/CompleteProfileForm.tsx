@@ -41,7 +41,7 @@ const CompleteProfileForm = () => {
 
   return (
     <form
-      className="space-y-8"
+      className="space-y-8 w-full"
       onSubmit={handleSubmit(onCompleteProfileSubmit)}
     >
       <div>
@@ -99,7 +99,7 @@ const CompleteProfileForm = () => {
         />
       </div>
       <button
-        className="btn btn-primary w-full"
+        className="btn btn-primary w-full text-primary-gray-900"
         type="submit"
         disabled={isPending}
       >

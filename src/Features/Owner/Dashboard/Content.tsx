@@ -1,7 +1,7 @@
 import useGetOwnerProjects from "../../Projects/Hooks/useGetOwnerProjects";
 import Loading from "../../Shared/UI/Loading";
-import Stats from "../Stats";
 import DashboardHeader from "./Header";
+import Stats from "./Stats";
 
 const Dashboard = () => {
   const { isLoading, data } = useGetOwnerProjects();

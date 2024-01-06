@@ -1,13 +1,18 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toast";
-import "./App.css";
+
 import { environment } from "./Environment/env";
 import AuthLayout from "./Features/Authentication/Layout/Auth.leyout";
+
+import FreelancerDashboardLayout from "./Features/Freelancer/FreelancerLayout";
 import OwnerLayout from "./Features/Owner/OwnerLayout";
 import CheckOtp from "./Pages/Auth/CheckOtp";
 import SendOtp from "./Pages/Auth/SendOtp";
 import CompleteProfile from "./Pages/CompleteProfile";
+import FreelancerDashboard from "./Pages/Freelancer/Dashboard";
+import Proposals from "./Pages/Freelancer/Proposals";
+import SubmittedProjects from "./Pages/Freelancer/SubmittedProjects";
 import Home from "./Pages/Home";
 import NotFound from "./Pages/NotFound";
 import Owner from "./Pages/Owner/Dashboard";
@@ -27,13 +32,19 @@ function App() {
         <Route path="/auth" element={<AuthLayout />}>
           <Route index element={<SendOtp />} />
           <Route path="check-otp" element={<CheckOtp />} />
+          <Route path="complete-profile" element={<CompleteProfile />} />
         </Route>
-        <Route path="/complete-profile" element={<CompleteProfile />} />
         <Route path="/owner" element={<OwnerLayout />}>
           <Route index element={<Navigate to={"dashboard"} replace />} />
           <Route path="dashboard" element={<Owner />} />
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:projectId" element={<SingleProject />} />
+        </Route>
+        <Route path="/freelancer" element={<FreelancerDashboardLayout />}>
+          <Route index element={<Navigate to={"dashboard"} replace />} />
+          <Route path="dashboard" element={<FreelancerDashboard />} />
+          <Route path="proposals" element={<Proposals />} />
+          <Route path="projects" element={<SubmittedProjects /> } />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

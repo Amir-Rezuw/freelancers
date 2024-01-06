@@ -11,7 +11,6 @@ interface IProps {
   count: number;
   title: string;
   color?: keyof typeof colors;
-  // color?: "Blue" | "Success" | "Warning";
 }
 
 const StatCart = ({ Icon, count, title, color = "Blue" }: IProps) => {

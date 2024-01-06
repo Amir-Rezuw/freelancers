@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toast";
 import API from "../../../Constants/API";
-import { ChangeProposalStatus } from "../../../Types/Server/Proposals";
+import { ChangeProposalStatus } from "../../../Services/Proposals";
 import useErrorType from "../../Shared/Hooks/useErrorType";
 
 const useChangeProposalStatus = () => {

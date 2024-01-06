@@ -14,8 +14,8 @@ const OwnerLayout = () => {
                 to={link}
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-primary-blue-100/50 text-primary-blue-900 flex items-center gap-x-2 transition px-2 py-1.5 rounded-lg"
-                    : "flex items-center gap-x-2 transition px-2 py-1.5 rounded-lg text-primary-gray-600 hover:bg-primary-blue-100/50 hover:text-primary-blue-900"
+                    ? "bg-primary-blue-100/50 text-primary-blue-300 flex items-center gap-x-2 transition px-2 py-1.5 rounded-lg"
+                    : "flex items-center gap-x-2 transition px-2 py-1.5 rounded-lg text-primary-gray-600 hover:bg-primary-blue-100/50 hover:text-primary-blue-600"
                 }
               >
                 <Icon />
