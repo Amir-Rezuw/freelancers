@@ -1,5 +1,5 @@
 import { Statuses } from "../../Constants/Enums/Shared";
-import { IOwnerProjects } from "../../Types/Server/Projects";
+import { IProjects } from "../../Types/Server/Projects";
 import { textService } from "../../Utils/TextAndNumber";
 import IsVisible from "../Shared/UI/IsVisible";
 import Loading from "../Shared/UI/Loading";
@@ -7,7 +7,7 @@ import Toggle from "../Shared/UI/Toggle";
 import useToggleProjectStatus from "./Hooks/useToggleProjectStatus";
 
 interface IProps {
-  project: IOwnerProjects;
+  project: IProjects;
 }
 
 const ToggleProjectStatus = ({ project }: IProps) => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HiPencil } from "react-icons/hi";
-import { IProposal } from "../../Types/Server/Projects";
+import { IProposal } from "../../Types/Server/Proposal";
 import { textService } from "../../Utils/TextAndNumber";
 import useToggleState from "../Shared/Hooks/useToggleState";
 import Modal from "../Shared/UI/Modal";
@@ -10,26 +10,31 @@ interface IProps {
   proposal: IProposal;
   index: number;
 }
-
+const _CLASS_NAMES =
+  "p-4 text-right whitespace-nowrap text-sm text-primary-gray-600";
 const ProposalRow = ({ proposal, index }: IProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
-      <td className={`${index === 0 && "rounded-tr-2xl"}`}>{index + 1}</td>
-      <td>{proposal.user?.name}</td>
-      <td>
+      <td className={`${_CLASS_NAMES} ${index === 0 && "rounded-tr-2xl"}`}>
+        {index + 1}
+      </td>
+      <td className={_CLASS_NAMES}>{proposal.user?.name}</td>
+      <td className={_CLASS_NAMES}>
         <p>{textService.truncateText(proposal.description, 50)}</p>
       </td>
-      <td>{proposal.duration}</td>
-      <td>{textService.addCommas(proposal.price.toString())}</td>
-      <td>
+      <td className={_CLASS_NAMES}>{proposal.duration}</td>
+      <td className={_CLASS_NAMES}>
+        {textService.addCommas(proposal.price.toString())}
+      </td>
+      <td className={_CLASS_NAMES}>
         <span
           className={`badge ${textService.getStatusBadge(proposal.status)}`}
         >
           {textService.getStatusText(proposal.status)}
         </span>
       </td>
-      <td className={`${index === 0 && "rounded-tl-2xl"}`}>
+      <td className={`${_CLASS_NAMES} ${index === 0 && "rounded-tl-2xl"}`}>
         <Modal
           isOpen={isModalOpen}
           modalToggler={(preferredValue?: boolean) => {

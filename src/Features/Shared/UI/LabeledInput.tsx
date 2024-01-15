@@ -19,6 +19,7 @@ interface IProps<T extends FieldValues> {
   validation?: RegisterOptions;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
+  labelAfters?: string;
 }
 
 const LabeledInput = <T extends FieldValues>({
@@ -33,11 +34,12 @@ const LabeledInput = <T extends FieldValues>({
   error,
   onChange,
   className,
+  labelAfters,
 }: IProps<T>) => {
   return (
     <div className={`flex flex-col gap-y-2 ${className}`}>
       <label
-        className="block text-primary-gray-900"
+        className={`block text-primary-gray-900 relative box-border ${labelAfters}`}
         htmlFor={name}
       >
         {label} {required && <span className="text-error">*</span>}
@@ -47,7 +49,7 @@ const LabeledInput = <T extends FieldValues>({
         dir={inputDirection}
         defaultValue={value}
         id={name}
-        className={`text-input w-full ${error && "border border-error"}`}
+        className={`text-input w-full ${error && "border border-error"} `}
         type={type}
         {...register(name, validation)}
         onChange={onChange}

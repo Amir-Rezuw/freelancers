@@ -1,13 +1,13 @@
 import { Fragment } from "react";
 import { HiOutlineTrash } from "react-icons/hi";
 import { TbPencilMinus } from "react-icons/tb";
-import { IOwnerProjects } from "../../Types/Server/Projects";
+import { IProjects } from "../../Types/Server/Projects";
 import ConfirmDelete from "../Shared/UI/ConfirmDelete";
 import Modal from "../Shared/UI/Modal";
 import AddProjectForm from "./AddProjectForm";
 
 interface IProps {
-  project: IOwnerProjects;
+  project: IProjects;
   isDeleteModalOpen: boolean;
   toggleDeleteModal: (preferredValue?: boolean) => void;
   toggleEditModal: (preferredValue?: boolean) => void;

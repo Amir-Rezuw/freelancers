@@ -5,7 +5,7 @@ import {
   HiOutlineViewGrid,
 } from "react-icons/hi";
 import { Statuses } from "../../../Constants/Enums/Shared";
-import { IProposal } from "../../../Types/Server/Projects";
+import { IProposal } from "../../../Types/Server/Proposal";
 import { textService } from "../../../Utils/TextAndNumber";
 import StatCart from "../../Shared/UI/StatCart";
 
@@ -21,22 +21,23 @@ const Stats: FC<IProps> = ({ proposals }) => {
     (acc, current) => acc + current.price,
     0
   );
+
   return (
     <div className="grid grid-cols-1 gap-x-8 text-primary-gray-900 lg:grid-cols-3">
       <StatCart
         Icon={<HiOutlineViewGrid className="w-10 h-10 sm:w-20 sm:h-20" />}
-        count={proposalsCount}
+        count={proposalsCount.toString()}
         title="درخواست ها"
       />
       <StatCart
         Icon={<HiOutlineCurrencyDollar className="w-10 h-10 sm:w-20 sm:h-20" />}
-        count={acceptedProposalsCount.length}
+        count={acceptedProposalsCount.length.toString()}
         title="درخواست های تایید شده"
         color="Success"
       />
       <StatCart
         Icon={<HiOutlineCollection className="w-10 h-10 sm:w-20 sm:h-20" />}
-        count={+textService.addCommas(balance.toString())}
+        count={textService.addCommas(balance.toString())}
         title="کیف پول"
         color="Warning"
       />

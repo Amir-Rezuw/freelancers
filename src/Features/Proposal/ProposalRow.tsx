@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { IProposal } from "../../Types/Server/Projects";
+import { IProposal } from "../../Types/Server/Proposal";
 import { textService } from "../../Utils/TextAndNumber";
 interface IProps {
   index: number;
@@ -16,13 +16,20 @@ const ProposalRow = ({ index, proposal }: IProps) => {
       <td className={_CLASS_NAMES}>
         {textService.truncateText(proposal.description, 30)}
       </td>
-      <td className={_CLASS_NAMES}>{proposal.duration}</td>
+      <td className={_CLASS_NAMES}>
+        {proposal.duration}
+        &nbsp; روز
+      </td>
       <td className={_CLASS_NAMES}>
         {textService.addCommas(proposal.price.toString())}
       </td>
 
       <td className={`${_CLASS_NAMES} ${index === 0 && "rounded-tl-2xl"}`}>
-        {textService.getStatusText(proposal.status)}
+        <span
+          className={`badge ${textService.getStatusBadge(proposal.status)}`}
+        >
+          {textService.getStatusText(proposal.status)}
+        </span>
       </td>
     </Fragment>
   );

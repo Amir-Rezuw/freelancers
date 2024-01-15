@@ -8,7 +8,7 @@ const colors = {
 
 interface IProps {
   Icon: ReactNode;
-  count: number;
+  count: string;
   title: string;
   color?: keyof typeof colors;
 }

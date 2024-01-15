@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { toast } from "react-toast";
 import API from "../../../Constants/API";
 import { environment } from "../../../Environment/env";
-import { addOwnerProject } from "../../../Services/ProjectService";
+import { addOwnerProject } from "../../../Services/Project";
 import useErrorType from "../../Shared/Hooks/useErrorType";
 
 const useAddProject = () => {

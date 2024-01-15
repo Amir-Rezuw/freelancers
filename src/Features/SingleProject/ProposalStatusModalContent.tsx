@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { Statuses } from "../../Constants/Enums/Shared";
 import { MessagesText } from "../../Constants/Messages";
 import { textService } from "../../Utils/TextAndNumber";
@@ -26,6 +27,7 @@ const selectOptions = [
   },
 ];
 const ProposalStatusModalContent = ({ status, id, closerFn }: IProps) => {
+  const { projectId } = useParams();
   const { register, handleSubmit } = useForm<{ status: Statuses }>();
   const { changeStatus, isChanging } = useChangeProposalStatus();
 
@@ -33,7 +35,11 @@ const ProposalStatusModalContent = ({ status, id, closerFn }: IProps) => {
     <div>
       <form
         onSubmit={handleSubmit((data) => {
-          changeStatus({ id, data: data.status });
+          changeStatus({
+            id,
+            status: data.status,
+            projectId: projectId ?? "",
+          });
           closerFn(false);
         })}
       >

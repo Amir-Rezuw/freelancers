@@ -5,11 +5,11 @@ import {
   HiOutlineViewGrid,
 } from "react-icons/hi";
 import { Statuses } from "../../../Constants/Enums/Shared";
-import { IOwnerProjects } from "../../../Types/Server/Projects";
+import { IProjects } from "../../../Types/Server/Projects";
 import StatCart from "../../Shared/UI/StatCart";
 
 interface IProps {
-  projects: IOwnerProjects[];
+  projects: IProjects[];
 }
 const Stats: FC<IProps> = ({ projects }) => {
   const projectsCount = projects.length;

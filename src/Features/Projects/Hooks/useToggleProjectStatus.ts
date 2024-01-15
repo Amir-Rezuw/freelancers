@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { toast } from "react-toast";
 import API from "../../../Constants/API";
 import { environment } from "../../../Environment/env";
-import { toggleProjectStatus } from "../../../Services/ProjectService";
+import { toggleProjectStatus } from "../../../Services/Project";
 import useErrorType from "../../Shared/Hooks/useErrorType";
 
 const useToggleProjectStatus = () => {

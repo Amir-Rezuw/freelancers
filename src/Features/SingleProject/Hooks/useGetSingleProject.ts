@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../../Constants/API";
-import { getSingleProject } from "../../../Services/ProjectService";
+import { getSingleProject } from "../../../Services/Project";
 
 const useGetSingleProject = () => {
   const { projectId } = useParams();

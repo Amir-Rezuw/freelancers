@@ -8,6 +8,7 @@ const API = {
   },
   projects: {
     getOwnerProjects: "project/owner-projects",
+    getProjectsList: "project/list",
     addOwnerProject: "project/add",
     editOwnerProject: "project/update",
     singleProject: "project",
@@ -18,6 +19,7 @@ const API = {
   proposal: {
     proposal: "proposal",
     getList: "proposal/list",
+    add: "proposal/add",
   },
 };
 export default API;

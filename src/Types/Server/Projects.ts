@@ -1,5 +1,5 @@
 import { Statuses } from "../../Constants/Enums/Shared";
-import { IUser } from "./User";
+import { IProposal } from "./Proposal";
 export interface ICategory {
   _id: string;
   title: string;
@@ -11,16 +11,8 @@ export interface ICategory {
   updatedAt: string;
   __v: number;
 }
-export interface IProposal {
-  price: number;
-  _id: string;
-  duration: number;
-  description: string;
-  user: IUser | null;
-  status: Statuses;
-}
 
-export interface IOwnerProjects {
+export interface IProjects {
   title: string;
   description: string;
   status: Statuses;

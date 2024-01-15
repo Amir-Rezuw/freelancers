@@ -74,7 +74,7 @@ const AddProjectForm = ({
             value={defaultValues?.budget.toString()}
             dir="ltr"
             className="w-full"
-            label="بودجه به تومان"
+            label="بودجه"
             name="budget"
             register={register}
             type="text"
@@ -86,6 +86,7 @@ const AddProjectForm = ({
             validation={{
               required: MessagesText.RequiredFieldError,
             }}
+            labelAfters="after:absolute after:content-['تومان'] after:top-[3rem] after:text-xs after:right-5"
           />
 
           <Select

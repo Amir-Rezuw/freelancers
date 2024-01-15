@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { HiEye } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import { IOwnerProjects } from "../../Types/Server/Projects";
+import { IProjects } from "../../Types/Server/Projects";
 import { textService } from "../../Utils/TextAndNumber";
 import { timeService } from "../../Utils/TimeService";
 import useToggleState from "../Shared/Hooks/useToggleState";
@@ -10,7 +10,7 @@ import useDeleteProject from "./Hooks/useDeleteProject";
 import ToggleProjectStatus from "./ToggleProjectStatus";
 interface IProps {
   index: number;
-  project: IOwnerProjects;
+  project: IProjects;
 }
 const _CLASS_NAMES =
   "p-4 text-right whitespace-nowrap text-sm text-primary-gray-600";

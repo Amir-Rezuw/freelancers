@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toast";
 import API from "../../../Constants/API";
 import { environment } from "../../../Environment/env";
-import { deleteOwnerProject } from "../../../Services/ProjectService";
+import { deleteOwnerProject } from "../../../Services/Project";
 import useErrorType from "../../Shared/Hooks/useErrorType";
 
 const useDeleteProject = () => {

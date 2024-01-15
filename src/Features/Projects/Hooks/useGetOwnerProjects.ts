@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import API from "../../../Constants/API";
 import { environment } from "../../../Environment/env";
-import { getOwnerProjects } from "../../../Services/ProjectService";
+import { getOwnerProjects } from "../../../Services/Project";
 
 const useGetOwnerProjects = () => {
   const queryKey = useMemo(

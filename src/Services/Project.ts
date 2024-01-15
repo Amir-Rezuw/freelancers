@@ -2,14 +2,14 @@ import API from "../Constants/API";
 import { Statuses } from "../Constants/Enums/Shared";
 import {
   IAddProjectRequiredData,
-  IOwnerProjects,
+  IProjects,
   ISingleProjectData,
 } from "../Types/Server/Projects";
 import { Success } from "../Types/Shared/IApiResponse";
 import http from "./HttpServices";
 
 export const getOwnerProjects = async (): Promise<
-  Success<{ projects: IOwnerProjects[] }>
+  Success<{ projects: IProjects[] }>
 > => {
   return (await http.get(API.projects.getOwnerProjects)).data;
 };
@@ -46,4 +46,9 @@ export const getSingleProject = async (
   id: string | undefined
 ): Promise<void | Success<{ project: ISingleProjectData }>> => {
   if (id) return (await http.get(`${API.projects.singleProject}/${id}`)).data;
+};
+export const getProjectsList = async (): Promise<
+  Success<{ projects: IProjects[] }>
+> => {
+  return (await http.get(API.projects.getProjectsList)).data;
 };
