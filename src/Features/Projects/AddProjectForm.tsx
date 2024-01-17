@@ -4,6 +4,7 @@ import { TagsInput } from "react-tag-input-component";
 import { MessagesText } from "../../Constants/Messages";
 import { IAddProjectRequiredData } from "../../Types/Server/Projects";
 import { textService } from "../../Utils/TextAndNumber";
+import useGetCategoryList from "../Shared/Hooks/useGetCategoryList";
 import DatePicker from "../Shared/UI/DatePicker";
 import LabeledInput from "../Shared/UI/LabeledInput";
 import Loading from "../Shared/UI/Loading";
@@ -11,7 +12,6 @@ import Select from "../Shared/UI/Select";
 import Textarea from "../Shared/UI/Textarea";
 import useAddProject from "./Hooks/useAddProject";
 import useEditProject from "./Hooks/useEditProject";
-import useGetCategoryList from "./Hooks/useGetCategoryList";
 
 const AddProjectForm = ({
   toggleModal,
@@ -53,8 +53,7 @@ const AddProjectForm = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-y-5"
-    >
+      className="flex flex-col gap-y-5">
       <div className="flex flex-col gap-y-3">
         <div className="grid grid-cols-2 gap-x-4 gap-y-2">
           <LabeledInput
@@ -98,8 +97,7 @@ const AddProjectForm = ({
               required: MessagesText.RequiredFieldError,
               value: defaultValues?.category._id,
             }}
-            error={errors.category?.message}
-          >
+            error={errors.category?.message}>
             {data?.data.categories.map((item) => (
               <Fragment key={item._id}>
                 <Select.Option value={item._id}>{item.title}</Select.Option>
@@ -159,8 +157,7 @@ const AddProjectForm = ({
       </div>
       <button
         className="btn btn-primary"
-        disabled={isAdding || isEditing}
-      >
+        disabled={isAdding || isEditing}>
         {isAdding || isEditing ? (
           <Loading />
         ) : defaultValues ? (
