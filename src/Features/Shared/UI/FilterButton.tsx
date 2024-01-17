@@ -25,6 +25,9 @@ const FilterButton = <T extends IKeyValue>({
             disabled={currentFilter.toLowerCase() === value.toLowerCase()}
             onClick={() => {
               searchParams.set(filterField, value);
+              if (value === "ALL") {
+                searchParams.delete(filterField);
+              }
               setSearchParams(searchParams);
             }}
             key={value}

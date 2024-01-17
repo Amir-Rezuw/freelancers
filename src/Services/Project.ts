@@ -47,8 +47,8 @@ export const getSingleProject = async (
 ): Promise<void | Success<{ project: ISingleProjectData }>> => {
   if (id) return (await http.get(`${API.projects.singleProject}/${id}`)).data;
 };
-export const getProjectsList = async (): Promise<
-  Success<{ projects: IProjects[] }>
-> => {
-  return (await http.get(API.projects.getProjectsList)).data;
+export const getProjectsList = async (
+  search: string
+): Promise<Success<{ projects: IProjects[] }>> => {
+  return (await http.get(`${API.projects.getProjectsList}${search}`)).data;
 };

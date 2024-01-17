@@ -9,6 +9,7 @@ import LabeledInput from "../../Shared/UI/LabeledInput";
 import Loading from "../../Shared/UI/Loading";
 import Textarea from "../../Shared/UI/Textarea";
 import useCreateProposal from "../Hooks/useCreateProposal";
+
 type IFormData = {
   description: string;
   price: string;
@@ -48,8 +49,7 @@ const CreateProposal = ({ projectId, modalToggler }: IProps) => {
   return (
     <form
       className="grid grid-cols-2 gap-x-4 gap-y-2"
-      onSubmit={handleSubmit(sendProposal)}
-    >
+      onSubmit={handleSubmit(sendProposal)}>
       <LabeledInput
         dir="ltr"
         className="w-full"
@@ -96,8 +96,7 @@ const CreateProposal = ({ projectId, modalToggler }: IProps) => {
       <button
         type="submit"
         className="btn btn-primary text-primary-gray-900 col-start-2"
-        disabled={isPending}
-      >
+        disabled={isPending}>
         {isPending ? <Loading width={45} /> : "ارسال"}
       </button>
     </form>

@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
-    "@tanstack/react-query": "^5.8.9",
+    "@tanstack/react-query": "^5.17.15",
+    "@tanstack/react-query-devtools": "^5.17.15",
     "@types/js-cookie": "^3.0.6",
     "axios": "^1.6.2",
     "js-cookie": "^3.0.5",

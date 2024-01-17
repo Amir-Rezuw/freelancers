@@ -1,4 +1,6 @@
 import { Fragment } from "react";
+
+import Empty from "../../Shared/UI/Empty";
 import Loading from "../../Shared/UI/Loading";
 import Table from "../../Shared/UI/Table";
 import useGetProjectList from "../Hooks/useProjectList";
@@ -8,7 +10,7 @@ const _TD_CLASS_NAMES =
 const ProjectsTable = () => {
   const { data, isLoading } = useGetProjectList();
   if (isLoading) return <Loading />;
-
+  if (data?.data.projects.length === 0) return <Empty />;
   return (
     <Fragment>
       <Table>

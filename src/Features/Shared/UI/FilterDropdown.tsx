@@ -19,6 +19,9 @@ const FilterDropdown = <T extends IKeyValue[]>({
       value={value}
       onChange={(e) => {
         searchParams.set(filterField, e.target.value);
+        if (e.target.value === "ALL") {
+          searchParams.delete(filterField);
+        }
         setSearchParams(searchParams);
       }}>
       {options.map((item) => {
