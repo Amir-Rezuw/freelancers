@@ -6,6 +6,8 @@ import { environment } from "./Environment/env";
 import AuthLayout from "./Features/Authentication/Layout/Auth.leyout";
 import FreelancerDashboardLayout from "./Features/Freelancer/FreelancerLayout";
 import OwnerLayout from "./Features/Owner/OwnerLayout";
+import Guarded from "./Features/Shared/UI/Guarded";
+import AccessDenied from "./Pages/AccessDenied";
 import CheckOtp from "./Pages/Auth/CheckOtp";
 import SendOtp from "./Pages/Auth/SendOtp";
 import CompleteProfile from "./Pages/CompleteProfile";
@@ -30,18 +32,19 @@ function App() {
           <Route path="check-otp" element={<CheckOtp />} />
           <Route path="complete-profile" element={<CompleteProfile />} />
         </Route>
-        <Route path="/owner" element={<OwnerLayout />}>
+        <Route path="/owner" element={<Guarded> <OwnerLayout /> </Guarded>}>
           <Route index element={<Navigate to={"dashboard"} replace />} />
           <Route path="dashboard" element={<Owner />} />
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:projectId" element={<SingleProject />} />
         </Route>
-        <Route path="/freelancer" element={<FreelancerDashboardLayout />}>
+        <Route path="/freelancer" element={<Guarded> <FreelancerDashboardLayout /> </Guarded>}>
           <Route index element={<Navigate to={"dashboard"} replace />} />
           <Route path="dashboard" element={<FreelancerDashboard />} />
           <Route path="proposals" element={<Proposals />} />
           <Route path="projects" element={<SubmittedProjects /> } />
         </Route>
+        <Route path="/access-denied" element={<AccessDenied />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </QueryClientProvider> 

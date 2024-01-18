@@ -1,5 +1,5 @@
 import { ImFilesEmpty } from "react-icons/im";
-import { MessagesText } from "../../../Constants/Messages";
+import { MessagesText } from "../../../Constants/Enums/Messages";
 
 const Empty = () => {
   return (

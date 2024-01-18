@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { MessagesText } from "../../Constants/Enums/Messages";
 import { Statuses } from "../../Constants/Enums/Shared";
-import { MessagesText } from "../../Constants/Messages";
 import { textService } from "../../Utils/TextAndNumber";
 import IsVisible from "../Shared/UI/IsVisible";
 import Loading from "../Shared/UI/Loading";
@@ -41,8 +41,7 @@ const ProposalStatusModalContent = ({ status, id, closerFn }: IProps) => {
             projectId: projectId ?? "",
           });
           closerFn(false);
-        })}
-      >
+        })}>
         <Select
           label="تغییر وضعیت"
           name="status"
@@ -53,21 +52,18 @@ const ProposalStatusModalContent = ({ status, id, closerFn }: IProps) => {
               message: MessagesText.RequiredFieldError,
               value: true,
             },
-          }}
-        >
+          }}>
           {selectOptions.map((item) => (
             <Select.Option
               key={item.value}
-              value={item.value}
-            >
+              value={item.value}>
               {item.label}
             </Select.Option>
           ))}
         </Select>
         <button
           type="submit"
-          className="btn btn-primary w-full mt-5"
-        >
+          className="btn btn-primary w-full mt-5">
           <IsVisible isVisible={isChanging}>
             <Loading />
           </IsVisible>

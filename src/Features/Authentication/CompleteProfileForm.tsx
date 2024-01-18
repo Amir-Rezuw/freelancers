@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toast";
-import { UserTypes } from "../../Constants/Enums/Shared";
-import { MessagesText } from "../../Constants/Messages";
+import { MessagesText } from "../../Constants/Enums/Messages";
+import { Roles } from "../../Constants/Enums/Shared";
 import { ICompleteProfileRequiredData } from "../../Types/Server/User";
 import useErrorType from "../Shared/Hooks/useErrorType";
 import LabeledInput from "../Shared/UI/LabeledInput";
@@ -12,7 +12,7 @@ import useCompleteProfile from "./Hooks/useCompleteProfile";
 interface IFormData {
   name: string;
   email: string;
-  role: UserTypes;
+  role: Roles;
 }
 const CompleteProfileForm = () => {
   const navigate = useNavigate();
@@ -42,8 +42,7 @@ const CompleteProfileForm = () => {
   return (
     <form
       className="space-y-8 w-full"
-      onSubmit={handleSubmit(onCompleteProfileSubmit)}
-    >
+      onSubmit={handleSubmit(onCompleteProfileSubmit)}>
       <div>
         <LabeledInput
           register={register}
@@ -81,7 +80,7 @@ const CompleteProfileForm = () => {
           errorMessage={errors.role?.message}
           name="role"
           label="کارفرما"
-          value={UserTypes.owner}
+          value={Roles.Owner}
           register={register}
           validation={{
             required: MessagesText.RequiredFieldError,
@@ -92,7 +91,7 @@ const CompleteProfileForm = () => {
           errorMessage={errors.role?.message}
           watch={watch}
           name="role"
-          value={UserTypes.freelancer}
+          value={Roles.Freelancer}
           label="فریلنسر"
           register={register}
           validation={{ required: MessagesText.RequiredFieldError }}
@@ -101,8 +100,7 @@ const CompleteProfileForm = () => {
       <button
         className="btn btn-primary w-full text-primary-gray-900"
         type="submit"
-        disabled={isPending}
-      >
+        disabled={isPending}>
         {isPending ? <Loading /> : "تایید"}
       </button>
     </form>

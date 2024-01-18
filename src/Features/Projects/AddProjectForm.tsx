@@ -1,7 +1,7 @@
 import { ChangeEvent, Fragment, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { TagsInput } from "react-tag-input-component";
-import { MessagesText } from "../../Constants/Messages";
+import { MessagesText } from "../../Constants/Enums/Messages";
 import { IAddProjectRequiredData } from "../../Types/Server/Projects";
 import { textService } from "../../Utils/TextAndNumber";
 import useGetCategoryList from "../Shared/Hooks/useGetCategoryList";

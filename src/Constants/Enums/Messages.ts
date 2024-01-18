@@ -6,4 +6,5 @@ export enum MessagesText {
   PendingProfileError = "پروفایل شما در انتظار تایید است لطفا صبور باشید.",
   BannedProfileError = "پروفایل شما توسط ادمین مسدود شده است لطفا با پشتیبانی تماس بگیرید.",
   EmptyList = "لیست خالی میباشد",
+  AccessDenied = "شما به این قسمت دسترسی ندارید.",
 }

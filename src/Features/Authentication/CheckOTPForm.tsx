@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { HiArrowRight } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toast";
-import { Statuses, UserTypes } from "../../Constants/Enums/Shared";
-import { MessagesText } from "../../Constants/Messages";
+import { MessagesText } from "../../Constants/Enums/Messages";
+import { Roles, Statuses } from "../../Constants/Enums/Shared";
 import { environment } from "../../Environment/env";
 import useErrorType from "../Shared/Hooks/useErrorType";
 import useInterval from "../Shared/Hooks/useInterval";
@@ -51,12 +51,12 @@ const CheckOTPForm = () => {
         toast.error(MessagesText.BannedProfileError);
         return;
       }
-      if (data.user.role === UserTypes.owner) {
+      if (data.user.role === Roles.Owner) {
         toast.success(MessagesText.Welcome);
         navigate("/owner");
         return;
       }
-      if (data.user.role === UserTypes.freelancer) {
+      if (data.user.role === Roles.Freelancer) {
         toast.success(MessagesText.Welcome);
         navigate("/freelancer");
         return;
@@ -70,15 +70,13 @@ const CheckOTPForm = () => {
     <Fragment>
       <button
         className="flex items-center w-4/12 justify-between text-warning self-start"
-        onClick={() => navigate("/auth")}
-      >
+        onClick={() => navigate("/auth")}>
         <HiArrowRight />
         <p>ویرایش شماره</p>
       </button>
       <form
         className="space-y-3"
-        onSubmit={handleSubmit(onCheckCode)}
-      >
+        onSubmit={handleSubmit(onCheckCode)}>
         <div className="mt-4">
           <p className="font-bold text-primary-gray-800">
             کد تایید ارسال شده به شماره موبایل
@@ -92,8 +90,7 @@ const CheckOTPForm = () => {
               name="code"
               disabled={isPending}
               fieldLength={6}
-              inputClassNames="text-input w-14 mx-1 text-center"
-            >
+              inputClassNames="text-input w-14 mx-1 text-center">
               <span className="text-primary-gray-900">-</span>
             </OTPInputs>
           </div>
@@ -109,8 +106,7 @@ const CheckOTPForm = () => {
                 otpSender({ phoneNumber: phoneNumber ?? "" });
                 resetTimer();
               }}
-              className="text-primary-blue-700"
-            >
+              className="text-primary-blue-700">
               ارسال مجدد
             </button>
           )}
@@ -118,8 +114,7 @@ const CheckOTPForm = () => {
         <button
           className="btn btn-primary w-full text-primary-gray-900"
           type="submit"
-          disabled={isPending}
-        >
+          disabled={isPending}>
           {isPending ? <Loading /> : "تایید"}
         </button>
       </form>

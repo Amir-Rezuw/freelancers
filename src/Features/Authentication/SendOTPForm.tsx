@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { MessagesText } from "../../Constants/Messages";
+import { MessagesText } from "../../Constants/Enums/Messages";
 import LabeledInput from "../Shared/UI/LabeledInput";
 import Loading from "../Shared/UI/Loading";
 import { useAuthCtx } from "./Context/Auth.ctx";
@@ -20,8 +20,7 @@ const SendOTPForm = () => {
     <form
       className="space-y-8 w-full"
       onSubmit={handleSubmit(otpSender)}
-      id="send-otp-form"
-    >
+      id="send-otp-form">
       <div>
         <LabeledInput
           dir="ltr"
@@ -43,8 +42,7 @@ const SendOTPForm = () => {
       <button
         type="submit"
         className="btn btn-primary w-full text-primary-gray-900"
-        disabled={isPending}
-      >
+        disabled={isPending}>
         {isPending ? <Loading /> : "ارسال کد تایید"}
       </button>
     </form>

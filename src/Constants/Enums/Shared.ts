@@ -6,7 +6,8 @@ export enum Statuses {
   "OPEN" = "OPEN",
   "CLOSE" = "CLOSE",
 }
-export enum UserTypes {
-  owner = "OWNER",
-  freelancer = "FREELANCER",
+export enum Roles {
+  Owner = "OWNER",
+  Freelancer = "FREELANCER",
+  Admin = "ADMIN",
 }

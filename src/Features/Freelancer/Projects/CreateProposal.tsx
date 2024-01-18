@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toast";
-import { MessagesText } from "../../../Constants/Messages";
+import { MessagesText } from "../../../Constants/Enums/Messages";
 import { IAddingProposalData } from "../../../Types/Server/Proposal";
 import { textService } from "../../../Utils/TextAndNumber";
 import useErrorType from "../../Shared/Hooks/useErrorType";

@@ -1,4 +1,4 @@
-import { Statuses, UserTypes } from "../../Constants/Enums/Shared";
+import { Roles, Statuses } from "../../Constants/Enums/Shared";
 
 export interface ISendOtpRequestedData {
   phoneNumber: string;
@@ -22,7 +22,7 @@ export interface IUser {
   name: string;
   phoneNumber: string;
   resetLink: string | null;
-  role: UserTypes;
+  role: Roles;
   status: Statuses;
   updatedAt: string;
   __v: number;
@@ -45,7 +45,7 @@ export interface IUserData {
     isVerifiedPhoneNumber: boolean;
     isActive: boolean;
     status: Statuses;
-    role: UserTypes;
+    role: Roles;
     createdAt: string;
     updatedAt: string;
     __v: number;
@@ -57,5 +57,5 @@ export interface IUserData {
 export interface ICompleteProfileRequiredData {
   name: string;
   email: string;
-  role: UserTypes;
+  role: Roles;
 }

@@ -5,14 +5,14 @@ import {
   UseFormRegister,
   WatchInternal,
 } from "react-hook-form";
-import { UserTypes } from "../../../Constants/Enums/Shared";
+import { Roles } from "../../../Constants/Enums/Shared";
 import ErrorLabel from "./ErrorLabel";
 
 interface IProps<T extends FieldValues> {
   label: string;
   classNames?: string;
   name: Path<T>;
-  value: UserTypes;
+  value: Roles;
   register: UseFormRegister<T>;
   validation?: RegisterOptions;
   errorMessage?: string;
