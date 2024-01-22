@@ -61,6 +61,11 @@ const CheckOTPForm = () => {
         navigate("/freelancer");
         return;
       }
+      if (data.user.role === Roles.Admin) {
+        toast.success(MessagesText.Welcome);
+        navigate("/admin");
+        return;
+      }
     } catch (error) {
       toast.error(useErrorType(error));
     }

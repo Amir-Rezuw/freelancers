@@ -21,5 +21,8 @@ const API = {
     getList: "proposal/list",
     add: "proposal/add",
   },
+  admin: {
+    getUsersList: "admin/user/list",
+  },
 };
 export default API;

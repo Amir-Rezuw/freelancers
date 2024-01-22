@@ -4,6 +4,7 @@ import {
   ICompleteProfileRequiredData,
   ISendOtpRequestedData,
   ISendOtpResponse,
+  IUser,
   IUserData,
   IUserProfile,
 } from "../Types/Server/User";
@@ -31,4 +32,7 @@ export const GetUserProfile = async (): Promise<Success<IUserProfile>> => {
 };
 export const Logout = async () => {
   return (await http.post(`${API.user.logout}`)).data;
+};
+export const getUsersList = async (): Promise<Success<{ users: IUser[] }>> => {
+  return (await http.get(API.admin.getUsersList)).data;
 };
