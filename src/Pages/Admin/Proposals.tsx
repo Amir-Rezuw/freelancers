@@ -1,5 +1,11 @@
+import ProposalTable from "../../Features/Proposal/ProposalTable";
+
 const AdminProposals = () => {
-  return <div>AdminProposals</div>;
+  return (
+    <div>
+      <ProposalTable />
+    </div>
+  );
 };
 
 export default AdminProposals;

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { MessagesText } from "../../Constants/Enums/Messages";
 import { Statuses } from "../../Constants/Enums/Shared";
-import { textService } from "../../Utils/TextAndNumber";
+import { ChangeStatus } from "../../Constants/SelectOptions";
 import IsVisible from "../Shared/UI/IsVisible";
 import Loading from "../Shared/UI/Loading";
 import Select from "../Shared/UI/Select";
@@ -12,20 +12,7 @@ interface IProps {
   closerFn: (value?: boolean) => void;
   status: Statuses;
 }
-const selectOptions = [
-  {
-    label: textService.getStatusText(Statuses.VERIFIED),
-    value: Statuses.VERIFIED,
-  },
-  {
-    label: textService.getStatusText(Statuses.PENDING),
-    value: Statuses.PENDING,
-  },
-  {
-    label: textService.getStatusText(Statuses.REJECTED),
-    value: Statuses.REJECTED,
-  },
-];
+
 const ProposalStatusModalContent = ({ status, id, closerFn }: IProps) => {
   const { projectId } = useParams();
   const { register, handleSubmit } = useForm<{ status: Statuses }>();
@@ -53,7 +40,7 @@ const ProposalStatusModalContent = ({ status, id, closerFn }: IProps) => {
               value: true,
             },
           }}>
-          {selectOptions.map((item) => (
+          {ChangeStatus.map((item) => (
             <Select.Option
               key={item.value}
               value={item.value}>

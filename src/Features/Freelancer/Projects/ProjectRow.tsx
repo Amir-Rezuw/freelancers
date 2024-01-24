@@ -10,10 +10,11 @@ import CreateProposal from "./CreateProposal";
 interface IProps {
   project: IProjects;
   index: number;
+  isAdmin: boolean;
 }
 const _CLASS_NAMES =
   "p-4 text-right whitespace-nowrap text-sm text-primary-gray-600";
-const ProjectRow = ({ project, index }: IProps) => {
+const ProjectRow = ({ project, index, isAdmin }: IProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
@@ -27,24 +28,27 @@ const ProjectRow = ({ project, index }: IProps) => {
       <td className={_CLASS_NAMES}>
         {timeService.convertIsoToPersian(project.deadline)}
       </td>
-      <td className={_CLASS_NAMES}>
+      <td
+        className={`${_CLASS_NAMES} ${
+          isAdmin && index === 0 && "rounded-tl-2xl"
+        }`}>
         <span
           className={`badge ${
             project.status === "OPEN" ? "badge--success" : "badge--danger"
-          }`}
-        >
+          }`}>
           {textService.getStatusText(project.status)}
         </span>
       </td>
-      <td className={`${_CLASS_NAMES} ${index === 0 && "rounded-tl-2xl"}`}>
+      <td
+        hidden={isAdmin}
+        className={`${_CLASS_NAMES} ${index === 0 && "rounded-tl-2xl"}`}>
         <Modal
           className="md:min-w-[45rem]"
           isOpen={isModalOpen}
           modalToggler={(value?: boolean) =>
             useToggleState(setIsModalOpen, value)
           }
-          modalHeaderTitle={`درخواست انجام پروژه ${project.title}`}
-        >
+          modalHeaderTitle={`درخواست انجام پروژه ${project.title}`}>
           <CreateProposal
             modalToggler={(value?: boolean) =>
               useToggleState(setIsModalOpen, value)
@@ -55,8 +59,7 @@ const ProjectRow = ({ project, index }: IProps) => {
 
         <button
           onClick={() => useToggleState(setIsModalOpen)}
-          disabled={project.status === Statuses.CLOSE}
-        >
+          disabled={project.status === Statuses.CLOSE}>
           <MdAssignmentAdd
             className={`w-5 h-5 text-primary-blue-600 ${
               project.status === Statuses.CLOSE && "text-primary-blue-600/30"

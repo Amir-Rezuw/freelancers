@@ -15,6 +15,12 @@ export const textService = {
     const formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return formattedValue;
   },
+  capitalizeFirstLetter: (sentence: string): string => {
+    const words = sentence.toLowerCase().split(" ");
+    return words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  },
   getStatusText: (status: Statuses) => {
     switch (status) {
       case Statuses.CLOSE:

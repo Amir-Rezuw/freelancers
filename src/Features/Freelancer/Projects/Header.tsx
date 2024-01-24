@@ -17,7 +17,7 @@ const StatusOptions = [
     value: `${Statuses.CLOSE}`,
   },
 ];
-const ProjectsHeader = () => {
+const FreelancerProjectsHeader = () => {
   const { data } = useGetCategoryList();
   const selectOptions = data?.data.categories.map((item) => ({
     ...item,
@@ -46,4 +46,4 @@ const ProjectsHeader = () => {
   );
 };
 
-export default ProjectsHeader;
+export default FreelancerProjectsHeader;

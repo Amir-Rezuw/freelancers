@@ -1,8 +1,9 @@
 interface IProps {
   avatarUrl?: null | string;
+  name?: string;
 }
 
-const UserAvatar = ({ avatarUrl }: IProps) => {
+const UserAvatar = ({ avatarUrl, name }: IProps) => {
   return (
     <div className="flex items-center gap-x-2 text-primary-gray-600">
       <img
@@ -10,7 +11,7 @@ const UserAvatar = ({ avatarUrl }: IProps) => {
         src={avatarUrl ?? "/user.jpg"}
         alt="User-Avatar"
       />
-      <span>username</span>
+      <span>{name}</span>
     </div>
   );
 };

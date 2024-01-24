@@ -1,11 +1,11 @@
-import ProjectsHeader from "../../Features/Freelancer/Projects/Header";
-import ProjectsTable from "../../Features/Freelancer/Projects/Table";
+import FreelancerProjectsHeader from "../../Features/Freelancer/Projects/Header";
+import FreelancerProjectsTable from "../../Features/Freelancer/Projects/Table";
 
 const SubmittedProjects = () => {
   return (
     <div>
-      <ProjectsHeader />
-      <ProjectsTable />
+      <FreelancerProjectsHeader />
+      <FreelancerProjectsTable />
     </div>
   );
 };

@@ -7,4 +7,5 @@ export enum MessagesText {
   BannedProfileError = "پروفایل شما توسط ادمین مسدود شده است لطفا با پشتیبانی تماس بگیرید.",
   EmptyList = "لیست خالی میباشد",
   AccessDenied = "شما به این قسمت دسترسی ندارید.",
+  StatusChangeSuccess = "تغییر وضعیت با موفقیت صورت گرفت",
 }

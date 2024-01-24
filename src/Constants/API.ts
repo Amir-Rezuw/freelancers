@@ -23,6 +23,7 @@ const API = {
   },
   admin: {
     getUsersList: "admin/user/list",
+    changeUserStatus: "admin/user/verify",
   },
 };
 export default API;
