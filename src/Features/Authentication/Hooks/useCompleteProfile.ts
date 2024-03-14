@@ -6,7 +6,7 @@ import { completeProfile } from "../../../Services/AuthService";
 
 const useCompleteProfile = () => {
   const mutationKey = useMemo(
-    () => [`${environment.baseUrl}${API.completeProfile}`],
+    () => [`${environment.baseUrl}${API.user.completeProfile}`],
     []
   );
   return useMutation({
