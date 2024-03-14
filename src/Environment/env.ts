@@ -9,8 +9,8 @@ interface IEnvironment {
 
 export const environment: Readonly<IEnvironment> = {
   appName: "Freelancing",
-  baseUrl: "https://freelancers-app-backend.vercel.app/api/",
-  domain: "https://freelancers-app-backend.vercel.app/",
+  baseUrl: "https://freelancers-app-backend-eight.vercel.app/api/",
+  domain: "https://freelancers-app-backend-eight.vercel.app/",
   toastDelay: 5000,
   OtpLength: 6,
   OtpResendTimer: 90,
