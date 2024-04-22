@@ -40,8 +40,7 @@ const LabeledInput = <T extends FieldValues>({
     <div className={`flex flex-col gap-y-2 ${className}`}>
       <label
         className={`block text-primary-gray-900 relative box-border ${labelAfters}`}
-        htmlFor={name}
-      >
+        htmlFor={name}>
         {label} {required && <span className="text-error">*</span>}
       </label>
       {error && <ErrorLabel message={error} />}

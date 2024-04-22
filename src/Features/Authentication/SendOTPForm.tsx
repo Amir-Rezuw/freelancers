@@ -12,8 +12,10 @@ const SendOTPForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<IFormData>();
   const { isPending, otpSender } = useOtpSender();
+
   const { phoneNumber } = useAuthCtx();
 
   return (
@@ -23,6 +25,9 @@ const SendOTPForm = () => {
       id="send-otp-form">
       <div>
         <LabeledInput
+          onChange={(e) => {
+            setValue("phoneNumber", e.target.value);
+          }}
           dir="ltr"
           label="شماره موبایل"
           error={errors.phoneNumber?.message}
