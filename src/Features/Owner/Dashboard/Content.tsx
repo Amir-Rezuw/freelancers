@@ -12,7 +12,7 @@ import Stats from "../../Shared/UI/Stats";
 
 const Dashboard = () => {
   const { isLoading, data, isError } = useGetOwnerProjects();
-  if (isError) return <div>Error</div>;
+  if (isError) return <div className="text-primary-gray-900">Error</div>;
   if (isLoading) return <Loading />;
   const projects = data!.data.projects;
   const projectsCount = projects.length;

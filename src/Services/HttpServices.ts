@@ -1,7 +1,9 @@
 import axios from "axios";
-import { environment } from "../Environment/env";
+
+const _BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const app = axios.create({
-  baseURL: environment.baseUrl,
+  baseURL: _BASE_URL,
   withCredentials: true,
 });
 

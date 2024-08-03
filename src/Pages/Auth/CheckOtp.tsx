@@ -5,6 +5,7 @@ import { useAuthCtx } from "../../Features/Authentication/Context/Auth.ctx";
 const CheckOtp = () => {
   const { phoneNumber } = useAuthCtx();
   if (!phoneNumber) return <Navigate to={"/auth"} />;
+
   return <CheckOTPForm />;
 };
 

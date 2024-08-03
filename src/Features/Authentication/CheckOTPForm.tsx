@@ -17,6 +17,7 @@ interface IFormData {
   code: string;
 }
 const CheckOTPForm = () => {
+  const { setIsUserLoggedIn } = useAuthCtx();
   const { otpSender } = useOtpSender();
   const { phoneNumber } = useAuthCtx();
   const navigate = useNavigate();
@@ -27,16 +28,25 @@ const CheckOTPForm = () => {
     duration: environment.OtpResendTimer,
     step: 1,
   });
+
   const onCheckCode = async ({ code }: IFormData) => {
     if (code.toString().length !== environment.OtpLength) {
       toast.error("کد وارد شده اشتباه میباشد");
       return;
     }
     try {
-      const { data } = await mutateAsync({
-        phoneNumber: phoneNumber ?? "",
-        otp: `${code}`,
-      });
+      const { data } = await mutateAsync(
+        {
+          phoneNumber: phoneNumber ?? "",
+          otp: `${code}`,
+        },
+        {
+          onSuccess: () => {
+            setIsUserLoggedIn(true);
+            localStorage.setItem("isUserLoggedIn", "true");
+          },
+        }
+      );
       if (!data.user.isActive) {
         toast.success(data.message ?? MessagesText.Welcome);
         navigate(`/auth/complete-profile`);

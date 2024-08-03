@@ -2,9 +2,11 @@ import { useLocation } from "react-router-dom";
 
 import { Roles, Statuses } from "../../Constants/Enums/Shared";
 import useGetUserProfile from "../Authentication/Hooks/useGetUserProfile";
+import { useAuthCtx } from "../Authentication/Context/Auth.ctx";
 
 const useAuthorize = () => {
-  const { isLoading, user } = useGetUserProfile();
+  const { isUserLoggedIn } = useAuthCtx();
+  const { isLoading, user } = useGetUserProfile(isUserLoggedIn);
   const { pathname } = useLocation();
   let isAuthenticated = false;
 

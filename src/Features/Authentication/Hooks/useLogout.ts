@@ -8,6 +8,7 @@ const useLogout = () => {
   const { isPending: isLoggingOut, mutate: logout } = useMutation({
     mutationFn: Logout,
     onSuccess: () => {
+      localStorage.removeItem("isUserLoggedIn");
       queryClient.removeQueries();
       navigate("/auth", {
         replace: true,

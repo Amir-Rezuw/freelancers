@@ -51,6 +51,7 @@ export default {
         error: withOpacity("--error"),
         "red-500": withOpacity("--red-500"),
         "red-300": withOpacity("--red-300"),
+        "custom-red": "#f02",
       },
       container: {
         center: true,

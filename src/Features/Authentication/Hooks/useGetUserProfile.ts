@@ -4,7 +4,8 @@ import API from "../../../Constants/API";
 import { environment } from "../../../Environment/env";
 import { GetUserProfile } from "../../../Services/AuthService";
 
-const useGetUserProfile = () => {
+const useGetUserProfile = (isUserLoggedIn: boolean) => {
+  if (!isUserLoggedIn) return {};
   const queryKey = useMemo(
     () => [`${environment.baseUrl}${API.user.userProfile}`],
     []

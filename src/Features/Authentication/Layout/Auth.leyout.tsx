@@ -1,10 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { textService } from "../../../Utils/TextAndNumber";
 import Loading from "../../Shared/UI/Loading";
+import { useAuthCtx } from "../Context/Auth.ctx";
 import useGetUserProfile from "../Hooks/useGetUserProfile";
 
 const AuthLayout = () => {
-  const { isLoading, user } = useGetUserProfile();
+  const { isUserLoggedIn } = useAuthCtx();
+  const { isLoading, user } = useGetUserProfile(isUserLoggedIn);
   if (isLoading) return <Loading />;
   if (user)
     return <Navigate to={`/${textService.capitalizeFirstLetter(user.role)}`} />;

@@ -8,12 +8,10 @@ interface IProps {
 }
 
 const Guarded: FC<IProps> = ({ children }) => {
-  const { isAuthorized, isLoading, isAuthenticated, isVerified } =
-    useAuthorize();
+  const { isAuthorized, isLoading, isAuthenticated } = useAuthorize();
 
   if (!isAuthenticated && !isLoading) return <Navigate to={"/auth"} />;
-  if (!isLoading && (!isAuthorized || !isVerified))
-    return <Navigate to={"/access-denied"} />;
+  if (!isLoading && !isAuthorized) return <Navigate to={"/access-denied"} />;
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen w-screen bg-primary-gray-0">

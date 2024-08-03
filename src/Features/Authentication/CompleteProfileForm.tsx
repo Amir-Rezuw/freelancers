@@ -33,6 +33,7 @@ const CompleteProfileForm = () => {
     try {
       const response = await mutateAsync(data);
       toast.success(response.data.message ?? "موفق");
+      toast.warn("پروفایل شما در انتظار تایید است");
       navigate(`/${role.toString().toLowerCase()}`);
     } catch (error) {
       toast.error(useErrorType(error));
