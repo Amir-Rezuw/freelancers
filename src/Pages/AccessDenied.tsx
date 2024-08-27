@@ -1,11 +1,10 @@
 import { MdLogin } from "react-icons/md";
 import { MessagesText } from "../Constants/Enums/Messages";
 import useLogout from "../Features/Authentication/Hooks/useLogout";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useGetUserProfile from "../Features/Authentication/Hooks/useGetUserProfile";
 import { useAuthCtx } from "../Features/Authentication/Context/Auth.ctx";
 import Loading from "../Features/Shared/UI/Loading";
-import ErrorLabel from "../Features/Shared/UI/ErrorLabel";
 
 const AccessDenied = () => {
   const { isLoggingOut, logout } = useLogout();
